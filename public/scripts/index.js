@@ -2,6 +2,7 @@ const searchButton = document.querySelector('button.header__search-btn');
 const searchBar = document.querySelector('input.header__search-input');
 const body = document.querySelector('body');
 const productsPanel = document.querySelector('div.home-product');
+const categoriesPanel = document.querySelector('ul.category-list');
 
 function addProduct(data) { //take the element in data array then add into productsPanel
     data.forEach(element => {
@@ -37,12 +38,44 @@ function deleteAllProduct() { //delete all products in productsPanel
     }
 }
 
+function addCategory(data) {
+    data.forEach((e) => {
+        let link = document.createElement('a');
+        let list = document.createElement('li');
+
+        list.classList.add('category-item');
+        link.setAttribute('href', '');
+        link.classList.add('category-item-link');
+
+        link.innerText = e.category_name;
+
+        list.append(link);
+        categoriesPanel.append(list);
+    })
+}
+
+function deleteAllCategory() {
+    for (let i = 0; i < categoriesPanel.childNodes.length; i++) {
+        categoriesPanel.removeChild(categoriesPanel.childNodes[i]);
+        i--;
+    }
+}
+
 window.addEventListener('load', () => {
     axios.get('/products')
         .then((res) => {
             let data = [];
             data = res.data;
             addProduct(data);
+            axios.get('/categories')
+                .then((res) => {
+                    let categories = [];
+                    categories = res.data;
+                    addCategory(categories);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         })
         .catch((error) => {
             console.log(error);
@@ -56,6 +89,28 @@ searchButton.addEventListener('click', () => {
             data = res.data;
             deleteAllProduct();
             addProduct(data)
+
+            deleteAllCategory(); //delete category to add new category from search
+            let categories = [];
+            data.forEach((e) => {
+                let temp = true;
+                categories.forEach((cate) => {
+                    if (cate === e.product_category) temp = false;
+                })
+                if (temp) {
+                    categories.push(e.product_category);
+                }
+            })
+            categories.forEach((e) => {
+                axios.get(`/categories/${e}`)
+                    .then((res) => {
+                        console.log(res.data);
+                        addCategory(res.data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
         })
         .catch((error) => {
             console.log(error);

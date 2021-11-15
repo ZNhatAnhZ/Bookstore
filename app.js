@@ -42,8 +42,22 @@ app.get('/products', (req, res) => {
 
 app.get('/products/:title', (req, res) => {
     const { title } = req.params;
-    console.log(req.params);
     db.query(`SELECT * FROM products where product_name like '${title}'`, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
+app.get('/categories', (req, res) => {
+    db.query(`SELECT * FROM category`, function (err, result, fields) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
+app.get('/categories/:id', (req, res) => {
+    const { id } = req.params;
+    db.query(`SELECT * FROM category where category_id = ${id}`, function (err, result, fields) {
         if (err) throw err;
         res.send(result);
     });
