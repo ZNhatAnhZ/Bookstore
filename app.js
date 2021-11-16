@@ -42,6 +42,16 @@ app.get('/products/:title', async (req, res) => {
     res.send(data);
 })
 
+app.get('/productdetail/:id', async (req, res) => {
+    const { id } = req.params;
+    const Product = await products.findAll({
+        where: {
+            id: id
+        }
+    });
+    res.render('productdetail.ejs', { Product });
+})
+
 app.get('/categories', async (req, res) => {
     const allCategories = await categories.findAll();
     const data = JSON.stringify(allCategories, null, 2)
@@ -59,3 +69,5 @@ app.get('/categories/:id', async (req, res) => {
     const data = JSON.stringify(Categories, null, 2)
     res.send(data);
 })
+
+

@@ -1,0 +1,357 @@
+.first-book-name{
+    display: flex;
+    font-size: 1.8rem;
+    padding: 20px 0;
+    align-items: center;
+}
+
+.book-container{
+    background-color: var(--white-color);
+}
+
+.home-product{
+    padding: 15px;
+}
+
+.home-product-info{
+    padding: 30px 35px 0 30px;
+}
+
+.product-img{
+    background-color: var(--white-color);
+    height: 430px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 50%;
+    background-position-y: center;
+    margin: 0 30px;
+}
+
+.book-heading{
+    font-size: 3rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.5rem;
+    padding-bottom: 18px;
+    margin: 0;
+}
+
+.product-view-sa{
+    padding-bottom: 10px;
+}
+
+.product-view-sa-supplier{
+    display: inline-block;
+    width: 60%;
+    padding-right: 15px;
+    font-size: 1.6rem;
+}
+
+.product-view-sa-supplier span:nth-of-type(2) {
+    font-weight: 600;
+}
+
+.product-view-sa-author{
+    display: inline-block;
+    width: 39%;
+    padding-left: 15px;
+    font-size: 1.6rem;
+    padding-bottom: 4px;
+}
+
+.product-view-sa-author span:nth-of-type(2) {
+    font-weight: 600;
+}
+
+.product-rating{
+    display: flex;
+    padding-bottom: 16px;
+}
+
+.rating-new-star{
+    color: rgb(248, 221, 66);
+    font-size: 1.6rem;
+    padding-right: 6px;
+}
+
+.product-rating span{
+    font-size: 1.6rem;
+    color: #333;
+    margin-left: 14px;
+}
+
+.book-item-price{
+    display: flex;
+    align-items: center;
+    padding: 20px 0 20px;
+    /* background-color: #f5f5f5; */
+}
+
+.book-item-price-old{
+    font-size: 2.4rem;
+    color: #666;
+    text-decoration: line-through;
+
+}
+
+.book-item-price-current{
+    font-size: 4.4rem;
+    color: var(--primary-color);
+    margin-left: 30px;
+    font-weight: 600;
+}
+
+.expected_delivery{
+    font-size: 1.6rem;
+    padding: 10px 0;
+}
+
+.expected_delivery-address{
+    padding-bottom: 6px;
+}
+
+.expected_delivery-address span:nth-child(1){
+    margin-right: 50px;
+}
+
+.expected_return-product-policy span:nth-child(1){
+    margin-right: 58px;
+}
+
+.product-view-quantity-box{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    /* height: 32px; */
+}
+
+.product-view-quantity-box label {
+    font-size: 2.4rem;
+    font-weight: 650;
+    padding: 0 8px 0 0;
+    margin-bottom: 0;
+    text-align: left;
+    max-width: 260px;
+    min-width: 150px;
+    color: #333;
+}
+
+.product-view-quantity-box-block{
+    display: flex;
+    align-items: center;
+    border: 1px solid #c1c1c1;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.btn-subtract-qty{
+    padding: 0 8px 4px 16px;
+    margin: auto;
+    text-align: center;
+}
+
+.product-view-quantity-box-block #qty {
+    border: none !important;
+    /* border: none;
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1; */
+    
+    width: 3em!important;
+    color: #0D0E0F;
+    font-weight: 700;
+    font-size: 1.6em;
+    height: 100%;
+    text-align: center;
+}
+
+.product-view-quantity-box-block a.btn-add-qty {
+    padding: 4px 16px 0 8px;
+    text-align: center;
+}
+
+.product_view_add_box{
+    display: flex;
+    align-items: center;
+    margin-top: 60px;
+    height: 48px;
+}
+
+.btn-cart-to-cart{
+    background-color: rgba(255,87,34,0.1);
+    border: 1px solid #ee4d2d;
+    min-width: 120px;
+    outline: none;
+    border-radius: 3px;
+    padding: 0 20px;
+    height: 100%;
+    margin-right: 15px;
+    font-size: 1.8rem;
+    color: #ee4d2d;
+    cursor: pointer;
+}
+
+.btn-cart-to-cart i{
+    font-size: 2.4rem;
+    padding-right: 6px;
+}
+
+.btn-cart-to-cart:hover{
+    background-color: rgba(230, 94, 49, 0.05);
+}
+
+.btn-buy-now{
+    background-color: var(--primary-color);
+    border: none;
+    width: 150px;
+    height: 100%;
+    padding: 12px 0;
+    outline: none;
+    border-radius: 3px;
+    font-size: 1.8rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.btn-buy-now:hover{
+    background-color: #f16b50;
+}
+
+.book-info-content{
+    margin-top: 30px;
+    background-color: var(--white-color);
+}
+
+.book-info-content h3{
+    font-size: 2.4rem;
+    font-weight: 700;
+    padding: 10px 14px;
+    margin: 10px 0 0;
+}
+
+.book-info-content h6{
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 400;
+    padding: 2px 14px;
+    margin: 0;
+}
+
+.book-info-content h5{
+    font-size: 2rem;
+    padding: 2px 14px;
+    margin: 10px 0;
+}
+
+.book-info-content p{
+    margin: 0;
+    padding: 4px 30px 4px 14px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    margin-bottom: 30px;
+}
+
+.mb-3{
+    padding: 14px 0;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.user-rating-book{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 14px;
+    background-color: var(--white-color);
+}
+
+.user-rating-book .box h5{
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.user-rating-book .box h6{
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.user-rating-book .box p{
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.user-rating-book form label{
+    display: inline-block;
+    font-size: 1.6rem;
+    margin-top: 6px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;;
+    border-radius: 2px;
+    appearance: none;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.add-comment{
+    background-color: rgba(255,87,34,0.1);
+    border: 1px solid #ee4d2d;
+    min-width: 120px;
+    outline: none;
+    border-radius: 3px;
+    padding: 10px 0px;
+    height: 100%;
+    margin: 20px 0;
+    font-size: 1.8rem;
+    color: #ee4d2d;
+    cursor: pointer;
+}
+
+.add-comment:hover{
+    background-color: rgba(230, 94, 49, 0.05);
+}
+
+.recomend-product{
+    margin-top: 60px;
+    padding-bottom: 60px;
+}
+
+.gird__row-limit{
+    max-height: 350px;
+    overflow: hidden;
+}
+
+.title-recomend{
+    font-size: 2rem;
+    padding: 6px 0;
+    color: #333;
+}
+
+.see-more-product{
+    margin: 10px 0;
+}
+
+.btn-see-more{
+    background-color: rgba(255,87,34,0.1);
+    border: 1px solid #ee4d2d;
+    outline: none;
+    border-radius: 3px;
+    padding: 4pxpx 0px;
+    height: 100%;
+    margin: 20px 0;
+    font-size: 1.8rem;
+    color: #ee4d2d;
+    cursor: pointer;
+}
+
+.btn-see-more:hover{
+    background-color: rgba(230, 94, 49, 0.05);
+}
