@@ -61,58 +61,43 @@ function deleteAllCategory() {
     }
 }
 
-window.addEventListener('load', () => {
-    axios.get('/products')
-        .then((res) => {
-            let data = [];
-            data = res.data;
-            addProduct(data);
-            axios.get('/categories')
-                .then((res) => {
-                    let categories = [];
-                    categories = res.data;
-                    addCategory(categories);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+window.addEventListener('load', async () => {
+    try {
+        const productsResponse = await axios.get('/products');
+        const categoriesResponse = await axios.get('/categories');
+
+        addProduct(productsResponse.data);
+        addCategory(categoriesResponse.data);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
-searchButton.addEventListener('click', () => {
-    axios.get(`/products/${searchBar.value}`)
-        .then((res) => {
-            let data = [];
-            data = res.data;
-            deleteAllProduct();
-            addProduct(data)
+searchButton.addEventListener('click', async () => {
+    try {
+        const findProductsResponse = await axios.get(`/products/${searchBar.value}`);
+        const products = findProductsResponse.data;
+        deleteAllProduct();
+        deleteAllCategory();
+        addProduct(products)
+        const categories = [];
 
-            deleteAllCategory(); //delete category to add new category from search
-            let categories = [];
-            data.forEach((e) => {
-                let temp = true;
-                categories.forEach((cate) => {
-                    if (cate === e.product_category) temp = false;
-                })
-                if (temp) {
-                    categories.push(e.product_category);
-                }
+        products.forEach((e) => {
+            let temp = true;
+            categories.forEach((cate) => {
+                if (cate === e.product_category) temp = false;
             })
-            categories.forEach((e) => {
-                axios.get(`/categories/${e}`)
-                    .then((res) => {
-                        console.log(res.data);
-                        addCategory(res.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            })
+            if (temp) {
+                categories.push(e.product_category);
+            }
         })
-        .catch((error) => {
-            console.log(error);
-        });
+
+        categories.forEach(async (e) => {
+            const categoriesResponse = await axios.get(`/categories/${e}`);
+            addCategory(categoriesResponse.data);
+        })
+    } catch (error) {
+        console.log(error);
+    }
+
 });
