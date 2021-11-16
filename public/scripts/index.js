@@ -19,7 +19,7 @@ function addProduct(data) { //take the element in data array then add into produ
         let productPriceText = document.createElement('span');
         productPriceText.classList.add('product-item-price-current');
 
-        productLink.setAttribute('href', `/productdetail/${element.id}`);
+        productLink.setAttribute('href', `/product/${element.id}`);
         img.style.backgroundImage = `url(${element.product_photo})`;
         productTitle.innerText = element.product_name;
         productPriceText.innerText = element.product_price;
@@ -75,7 +75,7 @@ window.addEventListener('load', async () => {
 
 searchButton.addEventListener('click', async () => {
     try {
-        const findProductsResponse = await axios.get(`/products/${searchBar.value}`);
+        const findProductsResponse = await axios.get(`/products?title=${searchBar.value}`);
         const products = findProductsResponse.data;
         deleteAllProduct();
         deleteAllCategory();
@@ -93,7 +93,7 @@ searchButton.addEventListener('click', async () => {
         })
 
         categories.forEach(async (e) => {
-            const categoriesResponse = await axios.get(`/categories/${e}`);
+            const categoriesResponse = await axios.get(`/categories?id=${e}`);
             addCategory(categoriesResponse.data);
         })
     } catch (error) {

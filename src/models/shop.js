@@ -5,6 +5,10 @@ module.exports = sequelize.define('shop', {
     shop_owner_id: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    revenue: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     // Other model options go here
