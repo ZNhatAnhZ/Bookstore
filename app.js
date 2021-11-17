@@ -34,12 +34,37 @@ app.listen(3000, () => {
 
 // render page
 
-app.get('/', (req, res) => {
-    res.render('index.ejs');
+app.get('/', async (req, res) => {
+    let loginCheck = null;
+    let username = null;
+    if (req.session.user_id) {
+        loginCheck = req.session.user_id;
+        const user = await users.findOne({
+            where: {
+                id: req.session.user_id
+            },
+            attributes: ['user_name']
+        });
+        username = user.dataValues.user_name;
+    }
+    res.render('index.ejs', { loginCheck, username });
 })
 
-app.get('/product/:id', (req, res) => {
-    res.render('productdetail.ejs');
+app.get('/product/:id', async (req, res) => {
+    let loginCheck = null;
+    let username = null;
+    if (req.session.user_id) {
+        loginCheck = req.session.user_id;
+        const user = await users.findOne({
+            where: {
+                id: req.session.user_id
+            },
+            attributes: ['user_name']
+        });
+        console.log(user);
+        username = user.dataValues.user_name;
+    }
+    res.render('productdetail.ejs', { loginCheck, username });
 })
 
 app.get('/login', (req, res) => {
@@ -160,12 +185,8 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-    req.session.user_id = null;
+    req.session.destroy();
     res.redirect('/');
-})
-
-app.get('/secret', isLoggedin, (req, res) => {
-    res.send('this is secret')
 })
 
 // register and login and logout

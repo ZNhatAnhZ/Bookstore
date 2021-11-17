@@ -106,29 +106,34 @@
                             <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                             <a href="" class="header__navbar-item-link">Trợ giúp</a>
                         </li>
-                        <!-- Chua dang nhap -->
-                        <a href="LoginRegistrationForm/index2.html" class="register_link">
-                            <li class="header__navbar-item header__navbar-item-register">Đăng Ký</li>
-                        </a>
-                        <a href="LoginRegistrationForm/index2.html" class="login_link">
-                            <li class="header__navbar-item header__navbar-item-register">Đăng Nhập</li>
-                        </a>
-                        <!-- Da dang nhap -->
-                        <!-- <li class="header__navbar-item header__navbar-user">
-                            <img src="/image/user-avt.png" alt="" class="header__navbar-userimg">
-                            <span class="header__navbar-userspan">Nguyễn Tiến Đàn</span>
-                            <ul class="navbar__user-menu">
-                                <li>
-                                    <a href="">Tài khoản của tôi</a>
-                                </li>
-                                <li>
-                                    <a href="">Đơn mua</a>
-                                </li>
-                                <li>
-                                    <a href="">Đăng xuất</a>
-                                </li>
-                            </ul>
-                        </li> -->
+                        <% if (loginCheck) { %>
+                            <li class="header__navbar-item header__navbar-user">
+                                <img src="/image/user-avt.png" alt="" class="header__navbar-userimg">
+                                <span class="header__navbar-userspan">
+                                    <%= username %>
+                                </span>
+                                <ul class="navbar__user-menu">
+                                    <li>
+                                        <a href="">Tài khoản của tôi</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Đơn mua</a>
+                                    </li>
+                                    <li>
+                                        <form action="/logout" method="POST">
+                                            <a href="#" onclick="this.parentNode.submit()">Đăng xuất</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                            <% } else {%>
+                                <a href="/register" class="register_link">
+                                    <li class="header__navbar-item header__navbar-item-register">Đăng Ký</li>
+                                </a>
+                                <a href="/login" class="login_link">
+                                    <li class="header__navbar-item header__navbar-item-register">Đăng Nhập</li>
+                                </a>
+                                <% } %>
                     </ul>
                 </nav>
                 <div class="header-with-search">
