@@ -51,17 +51,17 @@ app.get('/products', async (req, res) => {
 })
 
 app.get('/categories', async (req, res) => {
-    if (req.query['id'] == null) {
-        const allCategories = await categories.findAll();
-        const data = JSON.stringify(allCategories, null, 2)
-        res.send(data);
-    } else {
+    if (req.query['id'] != null) {
         const Categories = await categories.findAll({
             where: {
                 id: req.query.id
             }
         });
         const data = JSON.stringify(Categories, null, 2)
+        res.send(data);
+    } else {
+        const allCategories = await categories.findAll();
+        const data = JSON.stringify(allCategories, null, 2)
         res.send(data);
     }
 })
@@ -77,14 +77,16 @@ app.get('/user', async (req, res) => {
     }
 })
 
-app.get('/productdetail/:id', async (req, res) => {
-    const { id } = req.params;
-    const Product = await products.findByPk(id);
-    const Provider = await shop.findOne({ where: { shop_owner_id: Product.provider_id } });
-    const User = await users.findByPk(Provider.id);
-    const productDetail = Product.dataValues;
-    res.send({ productDetail, User });
-})
+// app.get('/productdetail/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const Product = await products.findByPk(id);
+//     const Provider = await shop.findOne({ where: { shop_owner_id: Product.provider_id } });
+//     const User = await users.findByPk(Provider.id);
+//     const productDetail = Product.dataValues;
+//     res.send({ productDetail, User });
+// })
+
+
 
 
 
