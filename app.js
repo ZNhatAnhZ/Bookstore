@@ -7,12 +7,23 @@ const shop = require('./src/models/shop');
 const categories = require('./src/models/category');
 const users = require('./src/models/users');
 const { Op } = require("sequelize");
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
+function isLoggedin(req, res, next) {
+    if (!req.session.user_id) {
+        res.redirect(`/login?origin=${req.originalUrl}`);
+    }
+    next();
+
+}
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'))
+app.set('views', path.join(__dirname, '/views'));
 app.use('/public', express.static(path.join(__dirname, '/public')));
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(session({ secret: 'notagoodsecret' }))
 
 require('./src/database/connection');
 
@@ -21,6 +32,8 @@ app.listen(3000, () => {
     console.log('listening on 3000');
 })
 
+// render page
+
 app.get('/', (req, res) => {
     res.render('index.ejs');
 })
@@ -28,6 +41,23 @@ app.get('/', (req, res) => {
 app.get('/product/:id', (req, res) => {
     res.render('productdetail.ejs');
 })
+
+app.get('/login', (req, res) => {
+    if (req.query.origin)
+        req.session.returnTo = req.query.origin
+    else
+        req.session.returnTo = req.header('Referer')
+
+    res.render('login.ejs');
+})
+
+app.get('/register', (req, res) => {
+    res.render('register.ejs');
+})
+
+// render page
+
+// get product category user
 
 app.get('/products', async (req, res) => {
     if (req.query['title'] != null) {
@@ -77,15 +107,68 @@ app.get('/user', async (req, res) => {
     }
 })
 
-// app.get('/productdetail/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const Product = await products.findByPk(id);
-//     const Provider = await shop.findOne({ where: { shop_owner_id: Product.provider_id } });
-//     const User = await users.findByPk(Provider.id);
-//     const productDetail = Product.dataValues;
-//     res.send({ productDetail, User });
-// })
+// get product category user
 
+
+// register and login
+
+app.post('/register', async (req, res) => {
+    const { password, username } = req.body;
+    const hash = await bcrypt.hash(password, 12);
+    const user = await users.findOne({
+        where: {
+            user_name: username
+        }
+    });
+    if (user == null) {
+        const newUser = await users.create({
+            user_name: username,
+            user_type: 'user',
+            password: hash
+        })
+        req.session.user_id = newUser.dataValues.id;
+        res.redirect('/')
+    } else {
+        res.send('already existed user');
+    }
+
+})
+
+app.post('/login', async (req, res) => {
+    let returnTo = '/';
+    const { password, username } = req.body;
+    const user = await users.findOne({
+        where: {
+            user_name: username
+        }
+    });
+    if (user != null) {
+        const validPassword = await bcrypt.compare(password, user.dataValues.password);
+        if (validPassword) {
+            req.session.user_id = user.dataValues.id;
+            if (req.session.returnTo) {
+                returnTo = req.session.returnTo
+                delete req.session.returnTo
+            }
+            res.redirect(returnTo);
+        } else {
+            res.redirect('/login');
+        }
+    } else {
+        res.redirect('/login');
+    }
+})
+
+app.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.redirect('/');
+})
+
+app.get('/secret', isLoggedin, (req, res) => {
+    res.send('this is secret')
+})
+
+// register and login and logout
 
 
 
