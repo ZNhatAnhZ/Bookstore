@@ -99,5 +99,34 @@ searchButton.addEventListener('click', async () => {
     } catch (error) {
         console.log(error);
     }
+});
 
+searchBar.addEventListener('keyup', async (e) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        try {
+            const findProductsResponse = await axios.get(`/products?title=${searchBar.value}`);
+            const products = findProductsResponse.data;
+            deleteAllProduct();
+            deleteAllCategory();
+            addProduct(products)
+            const categories = [];
+
+            products.forEach((e) => {
+                let temp = true;
+                categories.forEach((cate) => {
+                    if (cate === e.product_category) temp = false;
+                })
+                if (temp) {
+                    categories.push(e.product_category);
+                }
+            })
+
+            categories.forEach(async (e) => {
+                const categoriesResponse = await axios.get(`/categories?id=${e}`);
+                addCategory(categoriesResponse.data);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 });

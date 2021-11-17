@@ -15,7 +15,6 @@ function isLoggedin(req, res, next) {
         res.redirect(`/login?origin=${req.originalUrl}`);
     }
     next();
-
 }
 
 app.set('view engine', 'ejs');
@@ -77,10 +76,33 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
+    if (req.query.origin)
+        req.session.returnTo = req.query.origin
+    else
+        req.session.returnTo = req.header('Referer')
     res.render('register.ejs');
 })
 
-// render page
+app.get('/user/:id', isLoggedin, async (req, res) => {
+    let username = null;
+    let { id } = req.params;
+    if (req.session.user_id && id == req.session.user_id) {
+        loginCheck = req.session.user_id;
+        const user = await users.findOne({
+            where: {
+                id: req.session.user_id
+            },
+            attributes: ['user_name']
+        });
+        username = user.dataValues.user_name;
+        res.render('user-info.ejs', { username });
+        res.end();
+    } else {
+        res.send('unable to connect');
+    }
+})
+
+// -------------------------------
 
 // get product category user
 
@@ -132,12 +154,13 @@ app.get('/user', async (req, res) => {
     }
 })
 
-// get product category user
+// -------------------------------
 
 
-// register and login
+// register and login and logout
 
 app.post('/register', async (req, res) => {
+    let returnTo = '/';
     const { password, username } = req.body;
     const hash = await bcrypt.hash(password, 12);
     const user = await users.findOne({
@@ -152,7 +175,11 @@ app.post('/register', async (req, res) => {
             password: hash
         })
         req.session.user_id = newUser.dataValues.id;
-        res.redirect('/')
+        if (req.session.returnTo) {
+            returnTo = req.session.returnTo
+            delete req.session.returnTo
+        }
+        res.redirect(returnTo);
     } else {
         res.send('already existed user');
     }
@@ -189,7 +216,7 @@ app.post('/logout', (req, res) => {
     res.redirect('/');
 })
 
-// register and login and logout
+// -------------------------------
 
 
 
