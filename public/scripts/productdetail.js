@@ -9,7 +9,7 @@ const logo = document.querySelector('div.header__logo');
 
 window.addEventListener('load', async () => {
     try {
-        const id = window.location.pathname.slice(9, 10);
+        const id = window.location.pathname.slice(10);
         const product = await axios.get(`/products?id=${id}`);
         const user = await axios.get(`/user?id=${product.data.provider_id}`);
         const category = await axios.get(`/categories?id=${product.data.product_category}`);

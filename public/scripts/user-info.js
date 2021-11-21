@@ -3,7 +3,7 @@ const usernameContainer2 = document.querySelector('div.user-info-name');
 
 window.addEventListener('load', async () => {
     try {
-        const id = window.location.pathname.slice(6, 7);
+        const id = window.location.pathname.slice(6);
         const userResponse = await axios.get(`/user?id=${id}`);
 
         let usernameDiv1 = document.createElement('div');

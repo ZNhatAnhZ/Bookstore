@@ -10,11 +10,52 @@
     <link rel="stylesheet" href="/public/styles/base.css">
     <link rel="stylesheet" href="/public/styles/main.css">
     <link rel="stylesheet" href="/public/styles/user-info.css">
+    <link rel="stylesheet" href="/public/styles/personalshop.css">
     <!-- <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+    <div id="overlay-back"></div>
+    <div class="popup">
+        <span class="close-button">×</span>
+        <h1>Thêm sản phẩm</h1>
+        <form action="">
+            <div id="div-product-selecter">
+                <label for="choosing-product">Chọn sản phẩm</label>
+                <select name="choosing-product" id="product-selecter">
+                    <option value="">--Chọn sản phẩm--</option>
+                </select>
+            </div>
+            <div>
+                <label for="category">Tên thể loại</label>
+                <input type="text" name="category">
+            </div>
+            <div>
+                <label for="name">Tên sách</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label for="category">Giá tiền</label>
+                <input type="text" name="category">
+            </div>
+            <div>
+                <label for="category">Số lượng</label>
+                <input type="text" name="category">
+            </div>
+            <div>
+                <label for="category">Ảnh</label>
+                <input type="text" name="category">
+            </div>
+            <div>
+                <label for="category">Mô tả</label>
+                <textarea name="category">
+                </textarea>
+            </div>
+            <button class="filter-button filter-button-active">Submit</button>
+        </form>
+    </div>
+
     <div class="app">
         <header class="header">
             <div class="grid">
@@ -141,7 +182,7 @@
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="">
+                        <a href="/">
                             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                             <span class="logo-text">Ebook</span>
                         </a>
@@ -268,260 +309,167 @@
                                 <img src="/image/user-avt.png" alt="">
                             </div>
                             <div class="user-info-name">
-                                <span>
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    Sửa Hồ Sơ
-                                </span>
+                                <p>
+                                    <%= username %>
+                                </p>
                             </div>
                         </div>
-                        <div class="user-info-change-account">
-                            <div class="stardust-account">
-                                <div class="myaccount same-info-account">
-                                    <img src="/image/account.png" alt="">
-                                    <span>Tài Khoản Của Tôi</span>
-                                </div>
-                                <div class="user-file">
-                                    <span>Hồ sơ</span>
-                                </div>
-                                <div class="user-address">
-                                    <span>Địa chỉ</span>
-                                </div>
-                                <div class="user-change-pass">
-                                    <span>Đổi Mật Khẩu</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="purchase-order same-info-account">
-                            <img src="/image/don-mua.png" alt="">
-                            <span>Đơn Mua</span>
+                        <div class="purchase-order same-info-account" style="padding-top: 30px;">
+                            <span>Thêm sản phẩm</span>
                         </div>
                         <div class="user-account-notify same-info-account">
-                            <img src="/image/thong-bao.png" alt="">
-                            <span>Thông Báo</span>
+                            <span>Sửa sản phẩm</span>
                         </div>
                         <div class="user-account-voucher same-info-account">
-                            <img src="/image/voucher.png" alt="">
-                            <span>Kho Voucher</span>
+                            <span>Xóa sản phẩm</span>
                         </div>
-
                     </div>
                     <div class="grid-column-10">
-                        <div class="user-brief">
-                            <div class="user-my-brief">
-                                <h1>Hồ Sơ Của Tôi</h1>
-                                <span>Quản lí thông tin hồ sơ để bảo mật tài khoản</span>
-                            </div>
-                            <div class="user-form-brief">
-                                <div class="user-form-brief-text">
-                                    <form action="">
-                                        <div class="same-type-form">
-                                            <div class="user-login-name user-same-name">
-                                                <label for="">Tên Đăng Nhập</label>
-                                            </div>
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-input-name user-same-name">
-                                                <div class="user-input-name-label">
-                                                    <label>Tên</label>
-                                                </div>
-                                                <div class="user-input-name-input">
-                                                    <div class="input-with-validator-wrapper">
-                                                        <div class="input-with-validator input-with-validator--error">
-                                                            <input type="text" placeholder="" maxlength="255" value="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-email-name user-same-name">
-                                                <div class="user-email-name-label">
-                                                    <label>Email</label>
-                                                </div>
-                                                <div class="user-email-name-btn">
-                                                    <button>Thêm</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-phone-name user-same-name">
-                                                <div class="user-phone-name-label">
-                                                    <label>Số Điện Thoại</label>
-                                                </div>
-                                                <div class="user-phone-name-all">
-                                                    <div>0967134201</div>
-                                                    <button>Thay đổi</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-shop-name user-same-name">
-                                                <div class="user-shop-name-label">
-                                                    <label>Tên Shop</label>
-                                                </div>
-                                                <div class="user-shop-name-input">
-                                                    <div class="input-with-validator-wrapper">
-                                                        <div class="input-with-validator">
-                                                            <input type="text" placeholder="" maxlength="255"
-                                                                value="dan200110">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="home-filter">
+                            <span class="filter-span">Sắp xếp theo</span>
+                            <button class="filter-button filter-button-active">Phổ biến</button>
+                            <button class="filter-button">Mới nhất</button>
+                            <button class="filter-button">Bán chạy</button>
+                            <div class="filter-price">
+                                <span>Giá</span>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                <!-- list option -->
+                                <ul class="filter-price-list">
+                                    <li>
+                                        <a href="" class="filter-price-link">Giá thấp đến cao</a>
 
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-gender user-same-name">
-                                                <div class="user-gender-label">
-                                                    <label>Giới Tính</label>
-                                                </div>
-                                                <div class="user-gender-radiobutton">
-                                                    <div class="stardust-radio-group" role="radiogroup">
-                                                        <div class="stardust-radio" tabindex="0" role="radio"
-                                                            aria-checked="false">
-                                                            <div class="stardust-radio-button">
-                                                                <div class="stardust-radio-button__outer-circle">
-                                                                    <div class="stardust-radio-button__inner-circle">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="stardust-radio__content">
-                                                                <div class="stardust-radio__label">Nam</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="stardust-radio" tabindex="0" role="radio"
-                                                            aria-checked="false">
-                                                            <div class="stardust-radio-button">
-                                                                <div class="stardust-radio-button__outer-circle">
-                                                                    <div class="stardust-radio-button__inner-circle">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="stardust-radio__content">
-                                                                <div class="stardust-radio__label">Nữ</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="stardust-radio" tabindex="0" role="radio"
-                                                            aria-checked="false">
-                                                            <div class="stardust-radio-button">
-                                                                <div class="stardust-radio-button__outer-circle">
-                                                                    <div class="stardust-radio-button__inner-circle">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="stardust-radio__content">
-                                                                <div class="stardust-radio__label">Khác</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="same-type-form">
-                                            <div class="user-date-birth user-same-name">
-                                                <div class="user-date-label">
-                                                    <label>Ngày Sinh</label>
-                                                </div>
-                                                <div class="user-date-input">
-                                                    <input type="date" id="birthday" name="birthday">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="save-foot-form">
-                                            <button class="save-foot-form-btn">Lưu</button>
-                                        </div>
-                                    </form>
+                                    </li>
+                                    <li>
+                                        <a href="" class="filter-price-link">Giá cao đến thấp</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="filter-page">
+                                <span class="filter-page-num">
+                                    <span class="current-page-num">1</span>/<span class="all-page-num">14</span>
+                                </span>
+                                <div class="filter-page-control">
+                                    <a href="" class="filter-page-btn filter-page-btn-disable">
+                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="" class="filter-page-btn">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a>
                                 </div>
-                                <div class="user-upload-img">
-                                    <div class="user-img-contain">
-                                        <div class="user-avt-img">
-                                            <img src="/image/user-avt.png" alt="">
+                            </div>
+                        </div>
+                        <div class="home-product">
+                            <div class="grid__row">
+                                <div class="grid-column-new2">
+                                    <a href="" class="home-product-item">
+                                        <div class="product-item-img"
+                                            style="background-image: url(/image/toi-tu-hoc_3d.jpg);"></div>
+                                        <h4 class="product-item-name">
+                                            Tôi Tự Học - Phiên Bản Giới Hạn Có Đánh Số - Tặng Kèm nguyen tien dan tien
+                                            dan
+                                        </h4>
+                                        <div class="product-item-price">
+                                            <span class="product-item-price-old">1.200.000đ</span>
+                                            <span class="product-item-price-current">900.000đ</span>
                                         </div>
-                                        <input type="file" class="input-choose-picture" accept=".jpg,.jpeg,.png">
-                                        <button class="btn-choose-picture">Chọn Ảnh</button>
-                                        <div class="user-img-description">
-                                            <div>Dung lượng file tối đa 1 MB</div>
-                                            <div>Định dạng:.JPEG, .PNG</div>
+                                        <div class="product-item-rating">
+                                            <span class="rating-heart">
+                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                            </span>
+                                            <div class="rating-star">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </div>
+                                            <span class="rating-number-sold">Đã bán 88</span>
                                         </div>
-                                    </div>
+                                        <div class="product-item-origin">
+                                            <span>Hà Nội</span>
+                                        </div>
+                                        <div class="product-item-favourite">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Yêu thích
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="footer">
-            <div class="grid">
-                <div class="grid__row">
-                    <div class="grid-column-new2">
-                        <h3 class="footer-heading">Chăm sóc khách hàng</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">Trung Tâm Trợ Giúp</li>
-                            <li class="footer-item">Hướng Dẫn Mua Hàng</li>
-                            <li class="footer-item">Thanh Toán</li>
-                            <li class="footer-item">Vận Chuyển</li>
-                            <li class="footer-item">Trả Hàng & Hoàn Tiền</li>
-                            <li class="footer-item">Chính Sách Bảo Hành</li>
-                        </ul>
+            <footer class="footer">
+                <div class="grid">
+                    <div class="grid__row">
+                        <div class="grid-column-new2">
+                            <h3 class="footer-heading">Chăm sóc khách hàng</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">Trung Tâm Trợ Giúp</li>
+                                <li class="footer-item">Hướng Dẫn Mua Hàng</li>
+                                <li class="footer-item">Thanh Toán</li>
+                                <li class="footer-item">Vận Chuyển</li>
+                                <li class="footer-item">Trả Hàng & Hoàn Tiền</li>
+                                <li class="footer-item">Chính Sách Bảo Hành</li>
+                            </ul>
+                        </div>
+                        <div class="grid-column-new2">
+                            <h3 class="footer-heading">Giới thiệu</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">Giới thiệu về Ebook</li>
+                                <li class="footer-item">Liên hệ với chúng tôi</li>
+                                <li class="footer-item">Nguyễn Trần Nhật Anh</li>
+                                <li class="footer-item">Boy Cô Đơn</li>
+                                <li class="footer-item">Nguyễn Tiến Đàn</li>
+                                <li class="footer-item">Nhà Giàu Lắm Đất</li>
+                            </ul>
+                        </div>
+                        <div class="grid-column-new2">
+                            <h3 class="footer-heading">Danh mục</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">Sách giáo khoa</li>
+                                <li class="footer-item">Sách tiếng Anh</li>
+                                <li class="footer-item">Văn Học</li>
+                                <li class="footer-item">Sách Kinh Tế</li>
+                                <li class="footer-item">Tâm lí - Kĩ Năng Sống</li>
+                                <li class="footer-item">Sách dạy làm giàu</li>
+                            </ul>
+                        </div>
+                        <div class="grid-column-new2">
+                            <h3 class="footer-heading">Theo dõi chúng tôi trên</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <i class="footer-icon fa fa-facebook-official"></i>
+                                    FaceBook
+                                </li>
+                                <li class="footer-item">
+                                    <i class="footer-icon fa fa-instagram"></i>
+                                    Instagram
+                                </li>
+                                <li class="footer-item">
+                                    <i class="footer-icon fa fa-linkedin-square"></i>
+                                    LinkedIn
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-column-new2">
+                            <h3 class="footer-heading">Vào cửa hàng trên ứng dụng</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <img src="/image/app-store.png" alt="">
+                                </li>
+                                <li class="footer-item">
+                                    <img src="/image/gg-play.png" alt="">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="grid-column-new2">
-                        <h3 class="footer-heading">Giới thiệu</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">Giới thiệu về Ebook</li>
-                            <li class="footer-item">Liên hệ với chúng tôi</li>
-                            <li class="footer-item">Nguyễn Trần Nhật Anh</li>
-                            <li class="footer-item">Boy Cô Đơn</li>
-                            <li class="footer-item">Nguyễn Tiến Đàn</li>
-                            <li class="footer-item">Nhà Giàu Lắm Đất</li>
-                        </ul>
-                    </div>
-                    <div class="grid-column-new2">
-                        <h3 class="footer-heading">Danh mục</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">Sách giáo khoa</li>
-                            <li class="footer-item">Sách tiếng Anh</li>
-                            <li class="footer-item">Văn Học</li>
-                            <li class="footer-item">Sách Kinh Tế</li>
-                            <li class="footer-item">Tâm lí - Kĩ Năng Sống</li>
-                            <li class="footer-item">Sách dạy làm giàu</li>
-                        </ul>
-                    </div>
-                    <div class="grid-column-new2">
-                        <h3 class="footer-heading">Theo dõi chúng tôi trên</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <i class="footer-icon fa fa-facebook-official"></i>
-                                FaceBook
-                            </li>
-                            <li class="footer-item">
-                                <i class="footer-icon fa fa-instagram"></i>
-                                Instagram
-                            </li>
-                            <li class="footer-item">
-                                <i class="footer-icon fa fa-linkedin-square"></i>
-                                LinkedIn
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="grid-column-new2">
-                        <h3 class="footer-heading">Vào cửa hàng trên ứng dụng</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <img src="/image/app-store.png" alt="">
-                            </li>
-                            <li class="footer-item">
-                                <img src="/image/gg-play.png" alt="">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
 
-            </div>
-        </footer>
-    </div>
-    <script src="/public/scripts/user-info.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                </div>
+            </footer>
+        </div>
+        <script src="/public/scripts/personalshop.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

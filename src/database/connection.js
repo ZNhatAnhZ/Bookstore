@@ -6,7 +6,8 @@ const sequelize = new Sequelize('e-commerce', 'root', '123456789', {
     define: {
         freezeTableName: true,
         timestamps: false
-    }
+    },
+    port: 3307
 });
 
 module.exports = sequelize;
