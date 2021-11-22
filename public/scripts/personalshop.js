@@ -85,6 +85,9 @@ function closePopup() {
     quantitySelecter.value = '';
     imgSelecter.value = '';
     textareaSelecter.value = '';
+
+    popupButton.removeEventListener('click', sendProduct);
+    popupButton.removeEventListener('click', modifyProduct);
 }
 
 async function loadProductPanelAndPopup() {
@@ -118,7 +121,6 @@ async function sendProduct() {
         console.log(error);
     }
     await loadProductPanelAndPopup();
-    popupButton.removeEventListener('click', sendProduct);
     closePopup();
 }
 
@@ -126,7 +128,7 @@ async function modifyProduct() {
     const id = window.location.pathname.slice(14);
     try {
         const data = await axios.post(`/personalshop/${id}`, {
-            product_selector: 'none',
+            product_selector: productSelecter.value,
             product_category: categorySelecter.value,
             product_name: nameSelecter.value,
             product_price: priceSelecter.value,
@@ -138,7 +140,20 @@ async function modifyProduct() {
     } catch (error) {
         console.log(error);
     }
-    popupButton.removeEventListener('click', sendProduct);
+    await loadProductPanelAndPopup();
+    closePopup();
+}
+
+async function deleteProduct() {
+    const id = window.location.pathname.slice(14);
+    try {
+        const data = await axios.post(`/personalshop/${id}`, {
+            product_selector: productSelecter.value
+        })
+    } catch (error) {
+        console.log(error);
+    }
+    await loadProductPanelAndPopup();
     closePopup();
 }
 
@@ -179,6 +194,7 @@ modifyProductButton.addEventListener('click', () => {
     h1Popup.innerText = 'Sửa sản phẩm';
     popup.style.visibility = 'visible';
     overlayBack.style.visibility = 'visible';
+    popupButton.addEventListener('click', modifyProduct);
 });
 deleteProductButton.addEventListener('click', () => {
     popupButton.innerText = 'Xóa';
@@ -186,5 +202,6 @@ deleteProductButton.addEventListener('click', () => {
     h1Popup.innerText = 'Xóa sản phẩm';
     popup.style.visibility = 'visible';
     overlayBack.style.visibility = 'visible';
+    popupButton.addEventListener('click', deleteProduct);
 });
 closeButton.addEventListener('click', closePopup);

@@ -59,17 +59,16 @@ async function userSendProductData(req, res) {
                 });
             }
         } else if (product_selector !== 'none' && product_category && product_name && product_price && product_quantity && product_img && product_description && provider_id) {
-            const Product = await products.findByPk(product_selector);
             const categoryData = await category.findOne({
                 where: {
                     category_name: product_category
                 }
             })
-            if (!categoryData && Product) {
+            if (!categoryData) {
                 const newCategory = await category.create({
                     category_name: product_category
                 })
-                Product.set({
+                await products.update({
                     product_category: newCategory.id,
                     product_name: product_name,
                     product_price: product_price,
@@ -77,9 +76,13 @@ async function userSendProductData(req, res) {
                     product_details: product_description,
                     product_photo: product_img,
                     provider_id: provider_id
+                }, {
+                    where: {
+                        id: product_selector
+                    }
                 });
-            } else if (categoryData && Product) {
-                Product.set({
+            } else {
+                await products.update({
                     product_category: categoryData.id,
                     product_name: product_name,
                     product_price: product_price,
@@ -87,13 +90,18 @@ async function userSendProductData(req, res) {
                     product_details: product_description,
                     product_photo: product_img,
                     provider_id: provider_id
+                }, {
+                    where: {
+                        id: product_selector
+                    }
                 });
             }
         } else {
-            const Product = await products.findByPK(product_selector)
-            if (Product) {
-                await Product.destroy();
-            }
+            await products.destroy({
+                where: {
+                    id: product_selector
+                }
+            });
         }
         res.redirect(`/personalshop/${id}`);
     } else {
