@@ -18,6 +18,7 @@ window.addEventListener('load', async () => {
         let productSupplier = document.createElement('span');
 
         productPhoto.classList.add('product-img');
+        // sua anh
         productPhoto.style.backgroundImage = `url(product.data.product_photo)`;
         imgContainer.append(productPhoto);
 

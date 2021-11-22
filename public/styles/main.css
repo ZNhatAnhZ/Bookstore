@@ -20,6 +20,14 @@
     z-index: 1;
 }
 
+.register_link{
+    text-decoration: none;
+}
+
+.login_link{
+    text-decoration: none;
+}
+
 .header__navbar-user{
     display: flex;
     align-items: center;
@@ -428,7 +436,7 @@
     padding-left: 0;
     list-style: none;
     cursor: pointer;
-    height: 48vh;
+    max-height: 48vh;
     overflow: hidden;
 }
 

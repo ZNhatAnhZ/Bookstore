@@ -1,5 +1,6 @@
 const usernameContainer1 = document.querySelector('div.user-login-name');
 const usernameContainer2 = document.querySelector('div.user-info-name');
+const logo = document.querySelector('div.header__logo');
 
 window.addEventListener('load', async () => {
     try {
@@ -16,3 +17,4 @@ window.addEventListener('load', async () => {
         console.log(error);
     }
 });
+logo.firstElementChild.setAttribute('href', '/');
