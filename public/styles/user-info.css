@@ -185,6 +185,16 @@
     cursor: pointer;
 }
 
+.user-gender-radiobutton{
+    display: flex;
+    align-items: center;
+}
+
+.user-gender-radiobutton label{
+    padding-right: 8px;
+    font-size: 1.8rem;
+}
+
 .user-gender-radiobutton .stardust-radio-group {
     display: flex;
     align-items: center;
