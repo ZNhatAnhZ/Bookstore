@@ -20,40 +20,39 @@
     <div class="popup">
         <span class="close-button">×</span>
         <h1>Thêm sản phẩm</h1>
-        <form action="">
-            <div id="div-product-selecter">
-                <label for="choosing-product">Chọn sản phẩm</label>
-                <select name="choosing-product" id="product-selecter">
-                    <option value="">--Chọn sản phẩm--</option>
-                </select>
-            </div>
-            <div>
-                <label for="category">Tên thể loại</label>
-                <input type="text" name="category">
-            </div>
-            <div>
-                <label for="name">Tên sách</label>
-                <input type="text" name="name">
-            </div>
-            <div>
-                <label for="category">Giá tiền</label>
-                <input type="text" name="category">
-            </div>
-            <div>
-                <label for="category">Số lượng</label>
-                <input type="text" name="category">
-            </div>
-            <div>
-                <label for="category">Ảnh</label>
-                <input type="text" name="category">
-            </div>
-            <div>
-                <label for="category">Mô tả</label>
-                <textarea name="category">
-                </textarea>
-            </div>
-            <button class="filter-button filter-button-active">Submit</button>
-        </form>
+
+        <div id="div-product-selecter">
+            <label for="choosing-product">Chọn sản phẩm</label>
+            <select name="choosing-product" id="product-selecter">
+                <option value="none">--Chọn sản phẩm--</option>
+            </select>
+        </div>
+        <div>
+            <label for="category">Tên thể loại</label>
+            <input type="text" name="category" id="popupCategory">
+        </div>
+        <div>
+            <label for="name">Tên sách</label>
+            <input type="text" name="name" id="popupName">
+        </div>
+        <div>
+            <label for="price">Giá tiền</label>
+            <input type="text" name="price" id="popupPrice">
+        </div>
+        <div>
+            <label for="quantity">Số lượng</label>
+            <input type="text" name="quantity" id="popupQuantity">
+        </div>
+        <div>
+            <label for="img">Ảnh</label>
+            <input type="text" name="img" id="popupImg">
+        </div>
+        <div>
+            <label for="description">Mô tả</label>
+            <textarea name="description" id="popupTextarea"></textarea>
+        </div>
+        <button class="filter-button filter-button-active">Submit</button>
+
     </div>
 
     <div class="app">
@@ -468,8 +467,8 @@
                 </div>
             </footer>
         </div>
-        <script src="/public/scripts/personalshop.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/public/scripts/personalshop.js"></script>
 </body>
 
 </html>

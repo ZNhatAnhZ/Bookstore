@@ -16,6 +16,8 @@
 }
 
 .popup {
+    display: flex;
+    flex-direction: column;
     visibility: hidden;
     position: absolute;
     top: 40%;
@@ -37,12 +39,6 @@
     text-decoration: none;
     color: black;
     font-family: 'Roboto', sans-serif;
-}
-
-.popup form {
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
 }
 
 .popup label {
@@ -83,7 +79,7 @@
 }
 
 .close-button {
-    float: right;
+    align-self: flex-end;
     width: 1.5rem;
     line-height: 1.5rem;
     text-align: center;

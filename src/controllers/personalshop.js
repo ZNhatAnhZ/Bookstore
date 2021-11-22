@@ -1,4 +1,6 @@
 const users = require('../models/users');
+const products = require('../models/products');
+const category = require('../models/category');
 
 async function renderShop(req, res) {
     let username = null;
@@ -19,6 +21,87 @@ async function renderShop(req, res) {
     }
 }
 
+async function userSendProductData(req, res) {
+    let { id } = req.params;
+    if (req.session.user_id != null && id == req.session.user_id) {
+        const { product_selector, product_category, product_name, product_price, product_quantity, product_img, product_description, provider_id } = req.body;
+
+        if (product_selector === 'none' && product_category && product_name && product_price && product_quantity && product_img && product_description && provider_id) {
+            const categoryData = await category.findOne({
+                where: {
+                    category_name: product_category
+                }
+            })
+
+            if (!categoryData) {
+                const newCategory = await category.create({
+                    category_name: product_category
+                })
+
+                const newProduct = await products.create({
+                    product_category: newCategory.id,
+                    product_name: product_name,
+                    product_price: product_price,
+                    quantity: product_quantity,
+                    product_details: product_description,
+                    product_photo: product_img,
+                    provider_id: provider_id
+                });
+            } else {
+                const newProduct = await products.create({
+                    product_category: categoryData.id,
+                    product_name: product_name,
+                    product_price: product_price,
+                    quantity: product_quantity,
+                    product_details: product_description,
+                    product_photo: product_img,
+                    provider_id: provider_id
+                });
+            }
+        } else if (product_selector !== 'none' && product_category && product_name && product_price && product_quantity && product_img && product_description && provider_id) {
+            const Product = await products.findByPk(product_selector);
+            const categoryData = await category.findOne({
+                where: {
+                    category_name: product_category
+                }
+            })
+            if (!categoryData && Product) {
+                const newCategory = await category.create({
+                    category_name: product_category
+                })
+                Product.set({
+                    product_category: newCategory.id,
+                    product_name: product_name,
+                    product_price: product_price,
+                    quantity: product_quantity,
+                    product_details: product_description,
+                    product_photo: product_img,
+                    provider_id: provider_id
+                });
+            } else if (categoryData && Product) {
+                Product.set({
+                    product_category: categoryData.id,
+                    product_name: product_name,
+                    product_price: product_price,
+                    quantity: product_quantity,
+                    product_details: product_description,
+                    product_photo: product_img,
+                    provider_id: provider_id
+                });
+            }
+        } else {
+            const Product = await products.findByPK(product_selector)
+            if (Product) {
+                await Product.destroy();
+            }
+        }
+        res.redirect(`/personalshop/${id}`);
+    } else {
+        // res.send('unable to connect');
+    }
+}
+
 module.exports = {
-    renderShop
+    renderShop,
+    userSendProductData
 }
