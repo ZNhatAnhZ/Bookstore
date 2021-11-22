@@ -78,6 +78,13 @@ function closePopup() {
     popup.style.visibility = 'hidden';
     overlayBack.style.visibility = 'hidden';
     productSelecterDiv.style.visibility = 'hidden';
+
+    categorySelecter.value = '';
+    nameSelecter.value = '';
+    priceSelecter.value = '';
+    quantitySelecter.value = '';
+    imgSelecter.value = '';
+    textareaSelecter.value = '';
 }
 
 async function loadProductPanelAndPopup() {
@@ -137,6 +144,28 @@ async function modifyProduct() {
 
 window.addEventListener('load', loadProductPanelAndPopup);
 
+productSelecter.addEventListener('change', async () => {
+    if (productSelecter.value === 'none') {
+        categorySelecter.value = '';
+        nameSelecter.value = '';
+        priceSelecter.value = '';
+        quantitySelecter.value = '';
+        imgSelecter.value = '';
+        textareaSelecter.value = '';
+    } else {
+        const selectProductsResponse = await axios.get(`/products?id=${productSelecter.value}`);
+        const Product = selectProductsResponse.data;
+        const selectCategoryResponse = await axios.get(`/categories?id=${Product.product_category}`);
+        categorySelecter.value = selectCategoryResponse.data[0].category_name;
+        nameSelecter.value = Product.product_name;
+        priceSelecter.value = Product.product_price;
+        quantitySelecter.value = Product.quantity;
+        imgSelecter.value = Product.product_photo;
+        textareaSelecter.value = Product.product_details;
+    }
+
+})
+
 addProductButton.addEventListener('click', () => {
     popupButton.innerText = 'Thêm';
     h1Popup.innerText = 'Thêm sản phẩm';
@@ -158,5 +187,4 @@ deleteProductButton.addEventListener('click', () => {
     popup.style.visibility = 'visible';
     overlayBack.style.visibility = 'visible';
 });
-
 closeButton.addEventListener('click', closePopup);
