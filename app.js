@@ -13,6 +13,7 @@ const login = require('./src/routes/login');
 const logout = require('./src/routes/logout');
 const register = require('./src/routes/register');
 const personalshop = require('./src/routes/personalshop');
+const cart = require('./src/routes/cart');
 
 
 app.set('view engine', 'ejs');
@@ -53,4 +54,5 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/logout', logout);
 app.use('/personalshop', personalshop);
+app.use('/cart', cart);
 

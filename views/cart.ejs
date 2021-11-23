@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Gio hang</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/styles/base.css">
     <link rel="stylesheet" href="/public/styles/main.css">
+    <link rel="stylesheet" href="/public/styles/cart.css">
+    <!-- <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -46,12 +47,9 @@
                                             <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
-                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều
-                                                    bị
-                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh
-                                                    lýNguyễn
-                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh
-                                                    thủ
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
                                                     dâm nhiều bị yếu sinh lý</span>
                                             </div>
                                         </a>
@@ -61,12 +59,9 @@
                                             <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
-                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều
-                                                    bị
-                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh
-                                                    lýNguyễn
-                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh
-                                                    thủ
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
                                                     dâm nhiều bị yếu sinh lý</span>
                                             </div>
                                         </a>
@@ -76,12 +71,9 @@
                                             <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
                                                 <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
-                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều
-                                                    bị
-                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh
-                                                    lýNguyễn
-                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh
-                                                    thủ
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
                                                     dâm nhiều bị yếu sinh lý</span>
                                             </div>
                                         </a>
@@ -150,7 +142,7 @@
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="">
+                        <a href="/">
                             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                             <span class="logo-text">Ebook</span>
                         </a>
@@ -165,153 +157,87 @@
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <div class="header__cart">
-                        <div class="header__cart-wrap">
-                            <i class="header__cart-icon fa fa-shopping-cart"></i>
-                            <div class="header__cart-list no-cart">
-                                <% if (loginCheck) { %>
-                                    <h4>Sản phẩm đã thêm</h4>
-                                    <ul class="cart__list-item">
-                                        <% } else {%>
-                                            <!-- truong hop no-cart -->
-                                            <img src="https://uchimart.com/assets/images/no-cart.png" alt=""
-                                                class="no__cart-img">
-                                            <p>Chưa có sản phẩm</p>
-                                            <% } %>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="header__cart"></div>
                 </div>
             </div>
 
         </header>
-
-        <div class="container">
-            <div class="grid">
-                <div class="grid__row grid-column">
-                    <div class="grid-column-2">
-                        <nav class="category">
-                            <h3 class="category-heading">
-                                <i class="fa fa-list-ul" aria-hidden="true"></i>
-                                Danh mục
-                            </h3>
-                            <div class="category-list-container">
-                                <ul class="category-list">
-
-                                </ul>
-                            </div>
-
-                        </nav>
+        <div class="body-app">
+            <div class="my-body-app">
+                <div class="my-product-contain">
+                    <div class="product-contain-title">
+                        Giỏ Hàng Của Tôi
                     </div>
-                    <div class="grid-column-10">
-                        <div class="home-filter">
-                            <span class="filter-span">Sắp xếp theo</span>
-                            <button class="filter-button filter-button-active">Phổ biến</button>
-                            <button class="filter-button">Mới nhất</button>
-                            <button class="filter-button">Bán chạy</button>
-                            <div class="filter-price">
-                                <span>Giá</span>
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                <!-- list option -->
-                                <ul class="filter-price-list">
-                                    <li>
-                                        <a href="" class="filter-price-link">Giá thấp đến cao</a>
+                    <div class="product-contain-body">
+                        <div class="contain-body-head">
+                            <div class="head-product-name">Sản phẩm</div>
+                            <div class="head-product-price">Đơn giá</div>
+                            <div class="head-product-number">Số lượng</div>
+                            <div class="head-product-allprice">Số tiền</div>
+                            <div class="head-product-delete">Thao tác</div>
+                        </div>
+                        <div class="product-body-main">
+                            <div class="body-main-product">
+                                <div class="main-product-imgandtext">
+                                    <div class="product-imgandtext-img">
+                                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_36793.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product-imgandtext-text">
+                                        <span>Nhà Giả Kim (Tái Bản 2020)</span>
+                                        <span>Ma: 20</span>
+                                    </div>
+                                </div>
+                                <div class="main-product-seemore">
+                                    <button class="product-seemore-btn">Xem chi tiet &gt;&gt;</button>
+                                </div>
+                                <div class="main-product-price">
+                                    <div class="product-price-current">299.000d</div>
+                                </div>
+                                <div class="main-product-number">
+                                    <label for="">So luong: </label>
+                                    <input type="number" id="soluong" name="soluong" min="1" max="100" value="1">
+                                </div>
+                                <div class="main-product-allprice">
+                                    <span>299.000</span>
+                                </div>
+                                <div class="main-product-delete">
+                                    <button class="product-delete-btn">Xoa san pham</button>
+                                </div>
+                            </div>
+                            <div class="_2aRlry"></div>
 
-                                    </li>
-                                    <li>
-                                        <a href="" class="filter-price-link">Giá cao đến thấp</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="filter-page">
-                                <span class="filter-page-num">
-                                    <span class="current-page-num">1</span>/<span class="all-page-num">14</span>
-                                </span>
-                                <div class="filter-page-control">
-                                    <a href="" class="filter-page-btn filter-page-btn-disable">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                    </a>
-                                    <a href="" class="filter-page-btn">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                    </a>
+                        </div>
+                    </div>
+                    <div class="product-buy-payment">
+                        <div class="buy-payment-top">
+                            <div class="payment-top-how">Phương thức thanh toán</div>
+                            <div class="payment-top-when">Thanh toán khi nhận hàng</div>
+                        </div>
+                        <div class="buy-payment-main">
+                            <div class="payment-main-empty-left"></div>
+                            <div class="payment-main-content">
+                                <div class="main-content-price">
+                                    <div>Tổng tiền hàng</div>
+                                    <div>1.000.000d</div>
+                                </div>
+                                <div class="main-content-ship">
+                                    <div>Phí vận chuyển</div>
+                                    <div>30.000dd</div>
+                                </div>
+                                <div class="main-content-pay">
+                                    <div>Tổng thanh toán</div>
+                                    <div class="pay-all-price">1.030.000d</div>
+                                </div>
+                                <div class="main-content-buy">
+                                    <button class="content-buy-btn">Mua ngay</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="home-product">
-                            <div class="grid__row">
-                                <div class="grid-column-new2">
-                                    <a href="" class="home-product-item">
-                                        <div class="product-item-img"
-                                            style="background-image: url(/image/toi-tu-hoc_3d.jpg);"></div>
-                                        <h4 class="product-item-name">
-                                            Tôi Tự Học - Phiên Bản Giới Hạn Có Đánh Số - Tặng Kèm nguyen tien dan
-                                            tien
-                                            dan
-                                        </h4>
-                                        <div class="product-item-price">
-                                            <span class="product-item-price-current">900.000đ</span>
-                                        </div>
-                                        <div class="product-item-rating">
-                                            <span class="rating-heart">
-                                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                            </span>
-                                            <div class="rating-star">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="product-item-favourite">
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            Yêu thích
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="home-controller">
-                            <ul class="pagination">
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="pagination-item pagination-item-active">
-                                    <a href="" class="pagination-item-link">1</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">2</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">3</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">4</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">5</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">...</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">14</a>
-                                </li>
-                                <li class="pagination-item">
-                                    <a href="" class="pagination-item-link">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
         <footer class="footer">
             <div class="grid">
                 <div class="grid__row">
@@ -381,9 +307,7 @@
             </div>
         </footer>
     </div>
-
-
-    <script src="/public/scripts/index.js"></script>
+    <script src="/public/scripts/cart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 

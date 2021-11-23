@@ -121,7 +121,7 @@
                                         <a href="/personalshop/<%= loginCheck %>">Cửa hàng của tôi</a>
                                     </li>
                                     <li>
-                                        <a href="">Đơn mua</a>
+                                        <a href="/cart/<%= loginCheck %>">Đơn mua</a>
                                     </li>
                                     <li>
                                         <form action="/logout" method="POST">
@@ -160,98 +160,16 @@
                     <div class="header__cart">
                         <div class="header__cart-wrap">
                             <i class="header__cart-icon fa fa-shopping-cart"></i>
-                            <span class="header__cart-number">31</span>
                             <div class="header__cart-list no-cart">
-                                <!-- truong hop no-cart -->
-                                <img src="image/no-cart.png" alt="" class="no__cart-img">
-                                <p>Chưa có sản phẩm</p>
-                                <!-- truong hop co-cart -->
-                                <h4>Sản phẩm đã thêm</h4>
-                                <ul class="cart__list-item">
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1 Nguyễn Trần Nhật Anh chơi gái nhiều bị sida
-                                                Sách giáo khoa tiếng Việt 1 Nguyễn Trần Nhật Anh chơi gái nhiều bị sida
-                                            </h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="cart__item">
-                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
-                                        <div class="card__item-head">
-                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
-                                            <div class="cart__item-allprice">
-                                                <span class="cart__item-price">2.000.000</span>
-                                                <span class="cart__item-multiply">x</span>
-                                                <span class="cart__item-quantity">2</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="cart__foot">
-                                    <button class="cart__item-btn">Xem giỏ hàng</button>
-                                </div>
-
+                                <% if (loginCheck) { %>
+                                    <h4>Sản phẩm đã thêm</h4>
+                                    <ul class="cart__list-item">
+                                        <% } else {%>
+                                            <!-- truong hop no-cart -->
+                                            <img src="https://uchimart.com/assets/images/no-cart.png" alt=""
+                                                class="no__cart-img">
+                                            <p>Chưa có sản phẩm</p>
+                                            <% } %>
                             </div>
                         </div>
 
