@@ -18,7 +18,6 @@ function addProduct(data) { //take the element in data array then add into produ
         productPrice.classList.add('product-item-price');
         let productPriceText = document.createElement('span');
         productPriceText.classList.add('product-item-price-current');
-
         productLink.setAttribute('href', `/products/${element.id}`);
         img.style.backgroundImage = `url(${element.product_photo})`;
         productTitle.innerText = element.product_name;
