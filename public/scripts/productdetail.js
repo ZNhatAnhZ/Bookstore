@@ -56,7 +56,7 @@ window.addEventListener('load', async () => {
 
         productPhoto.classList.add('product-img');
         // sua anh
-        productPhoto.style.backgroundImage = `url(product.data.product_photo)`;
+        productPhoto.style.backgroundImage = `url(${product.data.product_photo})`;
         imgContainer.append(productPhoto);
 
         productSupplier.innerText = user.data.user_name;
