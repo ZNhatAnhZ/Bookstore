@@ -4,10 +4,14 @@ async function findUser(req, res) {
     if (req.query['id'] != null) {
         const User = await users.findByPk(req.query.id);
         res.send(User);
+    } else if (req.session.user_id) {
+        const user_id = req.session.user_id
+        res.send({ user_id });
     } else {
-        const Users = await users.findAll();
-        const data = JSON.stringify(Users, null, 2)
-        res.send(data);
+        // const Users = await users.findAll();
+        // const data = JSON.stringify(Users, null, 2)
+        // res.send(data);
+        res.send({})
     }
 }
 
@@ -26,7 +30,7 @@ async function renderUser(req, res) {
         res.render('user-info.ejs', { username });
         res.end();
     } else {
-        res.send('unable to connect');
+        // res.send('unable to connect');
     }
 }
 

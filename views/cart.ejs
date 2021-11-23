@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gio hang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/public/styles/base.css">
+    <link rel="stylesheet" href="/public/styles/main.css">
+    <link rel="stylesheet" href="/public/styles/cart.css">
+    <!-- <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="grid">
+                <nav class="header__navbar">
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item">Vào cửa hàng trên ứng dụng
+                        </li>
+                        <li class="header__navbar-item header__navbar-item-connect">Kết nối
+                            <a href="" class="header__navbar-item-link">
+                                <i class="header__navbar-icon fa fa-facebook-official"></i>
+                            </a>
+                            <a href="" class="header__navbar-item-link">
+                                <i class="header__navbar-icon fa fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item header__navbar-item-hasnotify">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <a href="" class="header__navbar-item-link">Thông báo</a>
+                            <div class="header__notify">
+                                <header class="header__notify-head">
+                                    <h3>Thông báo mới nhận</h3>
+                                </header>
+                                <!-- Thong bao -->
+                                <ul class="header__notify-list">
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
+                                                    dâm nhiều bị yếu sinh lý</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
+                                                    dâm nhiều bị yếu sinh lý</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name">Sách bạn chạy đang hay nhé </span>
+                                                <span class="header__notify-dis">Nguyễn Trần Nhật Anh thủ dâm nhiều bị
+                                                    yếu sinh lý Nguyễn Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn
+                                                    Trần Nhật Anh thủ dâm nhiều bị yếu sinh lýNguyễn Trần Nhật Anh thủ
+                                                    dâm nhiều bị yếu sinh lý</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name">Sách bán chạy </span>
+                                                <span class="header__notify-dis">Sách tôi đang bán chạy</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <img src="/image/Book-PNG-2.png" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name">Sach ban chay </span>
+                                                <span class="header__notify-dis">Mo ta</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <footer class="header__notify-footer">
+                                    <a href="">Xem tất cả</a>
+                                </footer>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item">
+                            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                            <a href="" class="header__navbar-item-link">Trợ giúp</a>
+                        </li>
+                        <!-- Chua dang nhap -->
+                        <a href="LoginRegistrationForm/index2.html" class="register_link">
+                            <li class="header__navbar-item header__navbar-item-register">Đăng Ký</li>
+                        </a>
+                        <a href="LoginRegistrationForm/index2.html" class="login_link">
+                            <li class="header__navbar-item header__navbar-item-register">Đăng Nhập</li>
+                        </a>
+                        <!-- Da dang nhap -->
+                        <!-- <li class="header__navbar-item header__navbar-user">
+                            <img src="/image/user-avt.png" alt="" class="header__navbar-userimg">
+                            <span class="header__navbar-userspan">Nguyễn Tiến Đàn</span>
+                            <ul class="navbar__user-menu">
+                                <li>
+                                    <a href="">Tài khoản của tôi</a>
+                                </li>
+                                <li>
+                                    <a href="">Đơn mua</a>
+                                </li>
+                                <li>
+                                    <a href="">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </nav>
+                <div class="header-with-search">
+                    <div class="header__logo">
+                        <a href="">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                            <span class="logo-text">Ebook</span>
+                        </a>
+                    </div>
+                    <div class="header__search">
+                        <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+                        <div class="header__search-select">
+                            <span>Trong shop</span>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                        <button class="header__search-btn">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="header__cart">
+                        <div class="header__cart-wrap">
+                            <i class="header__cart-icon fa fa-shopping-cart"></i>
+                            <span class="header__cart-number">31</span>
+                            <div class="header__cart-list no-cart">
+                                <!-- truong hop no-cart -->
+                                <img src="image/no-cart.png" alt="" class="no__cart-img">
+                                <p>Chưa có sản phẩm</p>
+                                <!-- truong hop co-cart -->
+                                <h4>Sản phẩm đã thêm</h4>
+                                <ul class="cart__list-item">
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1 Nguyễn Trần Nhật Anh chơi gái nhiều bị sida
+                                                Sách giáo khoa tiếng Việt 1 Nguyễn Trần Nhật Anh chơi gái nhiều bị sida
+                                            </h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="cart__item">
+                                        <img src="/image/Book-PNG-2.png" alt="" class="cart__list-img">
+                                        <div class="card__item-head">
+                                            <h5>Sách giáo khoa tiếng Việt 1</h5>
+                                            <div class="cart__item-allprice">
+                                                <span class="cart__item-price">2.000.000</span>
+                                                <span class="cart__item-multiply">x</span>
+                                                <span class="cart__item-quantity">2</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="cart__foot">
+                                    <button class="cart__item-btn">Xem giỏ hàng</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <div class="body-app">
+            <div class="my-body-app">
+                <div class="my-product-contain">
+                    <div class="product-contain-title">
+                        Giỏ Hàng Của Tôi
+                    </div>
+                    <div class="product-contain-body">
+                        <div class="contain-body-head">
+                            <div class="head-product-name">Sản phẩm</div>
+                            <div class="head-product-price">Đơn giá</div>
+                            <div class="head-product-number">Số lượng</div>
+                            <div class="head-product-allprice">Số tiền</div>
+                            <div class="head-product-delete">Thao tác</div>
+                        </div>
+                        <div class="product-body-main">
+                            <div class="body-main-product">
+                                <div class="main-product-imgandtext">
+                                    <div class="product-imgandtext-img">
+                                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_36793.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product-imgandtext-text">
+                                        <span>Nhà Giả Kim (Tái Bản 2020)</span>
+                                        <span>Ma: 20</span>
+                                    </div>
+                                </div>
+                                <div class="main-product-seemore">
+                                    <button class="product-seemore-btn">Xem chi tiet &gt;&gt;</button>
+                                </div>
+                                <div class="main-product-price">
+                                    <div class="product-price-old">350.000d</div>
+                                    <div class="product-price-current">299.000d</div>
+                                </div>
+                                <div class="main-product-number">
+                                    <label for="">So luong: </label>
+                                    <input type="number" id="soluong" name="soluong" min="1" max="100" value="1">
+                                </div>
+                                <div class="main-product-allprice">
+                                    <span>299.000</span>
+                                </div>
+                                <div class="main-product-delete">
+                                    <button class="product-delete-btn">Xoa san pham</button>
+                                </div>
+                            </div>
+                            <div class="_2aRlry"></div>
+                            <div class="body-main-product">
+                                <div class="main-product-imgandtext">
+                                    <div class="product-imgandtext-img">
+                                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_36793.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product-imgandtext-text">
+                                        <span>Nhà Giả Kim (Tái Bản 2020)</span>
+                                        <span>Ma: 20</span>
+                                    </div>
+                                </div>
+                                <div class="main-product-seemore">
+                                    <button class="product-seemore-btn">Xem chi tiet &gt;&gt;</button>
+                                </div>
+                                <div class="main-product-price">
+                                    <div class="product-price-old">350.000d</div>
+                                    <div class="product-price-current">299.000d</div>
+                                </div>
+                                <div class="main-product-number">
+                                    <label for="">So luong: </label>
+                                    <input type="number" id="soluong" name="soluong" min="1" max="100" value="1">
+                                </div>
+                                <div class="main-product-allprice">
+                                    <span>299.000</span>
+                                </div>
+                                <div class="main-product-delete">
+                                    <button class="product-delete-btn">Xoa san pham</button>
+                                </div>
+                            </div>
+                            <div class="_2aRlry"></div>
+
+                            <div class="body-main-product">
+                                <div class="main-product-imgandtext">
+                                    <div class="product-imgandtext-img">
+                                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_36793.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product-imgandtext-text">
+                                        <span>Nhà Giả Kim (Tái Bản 2020)</span>
+                                        <span>Ma: 20</span>
+                                    </div>
+                                </div>
+                                <div class="main-product-seemore">
+                                    <button class="product-seemore-btn">Xem chi tiet &gt;&gt;</button>
+                                </div>
+                                <div class="main-product-price">
+                                    <div class="product-price-old">350.000d</div>
+                                    <div class="product-price-current">299.000d</div>
+                                </div>
+                                <div class="main-product-number">
+                                    <label for="">So luong: </label>
+                                    <input type="number" id="soluong" name="soluong" min="1" max="100" value="1">
+                                </div>
+                                <div class="main-product-allprice">
+                                    <span>299.000</span>
+                                </div>
+                                <div class="main-product-delete">
+                                    <button class="product-delete-btn">Xoa san pham</button>
+                                </div>
+                            </div>
+                            <div class="_2aRlry"></div>
+                            <div class="body-main-product">
+                                <div class="main-product-imgandtext">
+                                    <div class="product-imgandtext-img">
+                                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_36793.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product-imgandtext-text">
+                                        <span>Nhà Giả Kim (Tái Bản 2020)</span>
+                                        <span>Ma: 20</span>
+                                    </div>
+                                </div>
+                                <div class="main-product-seemore">
+                                    <button class="product-seemore-btn">Xem chi tiet &gt;&gt;</button>
+                                </div>
+                                <div class="main-product-price">
+                                    <div class="product-price-old">350.000d</div>
+                                    <div class="product-price-current">299.000d</div>
+                                </div>
+                                <div class="main-product-number">
+                                    <label for="">So luong: </label>
+                                    <input type="number" id="soluong" name="soluong" min="1" max="100" value="1">
+                                </div>
+                                <div class="main-product-allprice">
+                                    <span>299.000</span>
+                                </div>
+                                <div class="main-product-delete">
+                                    <button class="product-delete-btn">Xoa san pham</button>
+                                </div>
+                            </div>
+                            <div class="_2aRlry"></div>
+
+                        </div>
+                    </div>
+                    <div class="product-buy-payment">
+                        <div class="buy-payment-top">
+                            <div class="payment-top-how">Phương thức thanh toán</div>
+                            <div class="payment-top-when">Thanh toán khi nhận hàng</div>
+                        </div>
+                        <div class="buy-payment-main">
+                            <div class="payment-main-empty-left"></div>
+                            <div class="payment-main-content">
+                                <div class="main-content-price">
+                                    <div>Tổng tiền hàng</div>
+                                    <div>1.000.000d</div>
+                                </div>
+                                <div class="main-content-ship">
+                                    <div>Phí vận chuyển</div>
+                                    <div>30.000dd</div>
+                                </div>
+                                <div class="main-content-pay">
+                                    <div>Tổng thanh toán</div>
+                                    <div class="pay-all-price">1.030.000d</div>
+                                </div>
+                                <div class="main-content-buy">
+                                    <button class="content-buy-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid-column-new2">
+                        <h3 class="footer-heading">Chăm sóc khách hàng</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">Trung Tâm Trợ Giúp</li>
+                            <li class="footer-item">Hướng Dẫn Mua Hàng</li>
+                            <li class="footer-item">Thanh Toán</li>
+                            <li class="footer-item">Vận Chuyển</li>
+                            <li class="footer-item">Trả Hàng & Hoàn Tiền</li>
+                            <li class="footer-item">Chính Sách Bảo Hành</li>
+                        </ul>
+                    </div>
+                    <div class="grid-column-new2">
+                        <h3 class="footer-heading">Giới thiệu</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">Giới thiệu về Ebook</li>
+                            <li class="footer-item">Liên hệ với chúng tôi</li>
+                            <li class="footer-item">Nguyễn Trần Nhật Anh</li>
+                            <li class="footer-item">Boy Cô Đơn</li>
+                            <li class="footer-item">Nguyễn Tiến Đàn</li>
+                            <li class="footer-item">Nhà Giàu Lắm Đất</li>
+                        </ul>
+                    </div>
+                    <div class="grid-column-new2">
+                        <h3 class="footer-heading">Danh mục</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">Sách giáo khoa</li>
+                            <li class="footer-item">Sách tiếng Anh</li>
+                            <li class="footer-item">Văn Học</li>
+                            <li class="footer-item">Sách Kinh Tế</li>
+                            <li class="footer-item">Tâm lí - Kĩ Năng Sống</li>
+                            <li class="footer-item">Sách dạy làm giàu</li>
+                        </ul>
+                    </div>
+                    <div class="grid-column-new2">
+                        <h3 class="footer-heading">Theo dõi chúng tôi trên</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <i class="footer-icon fa fa-facebook-official"></i>
+                                FaceBook
+                            </li>
+                            <li class="footer-item">
+                                <i class="footer-icon fa fa-instagram"></i>
+                                Instagram
+                            </li>
+                            <li class="footer-item">
+                                <i class="footer-icon fa fa-linkedin-square"></i>
+                                LinkedIn
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-column-new2">
+                        <h3 class="footer-heading">Vào cửa hàng trên ứng dụng</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <img src="/image/app-store.png" alt="">
+                            </li>
+                            <li class="footer-item">
+                                <img src="/image/gg-play.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

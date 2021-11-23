@@ -3,6 +3,7 @@ const searchBar = document.querySelector('input.header__search-input');
 const body = document.querySelector('body');
 const productsPanel = document.querySelector('div.home-product');
 const categoriesPanel = document.querySelector('ul.category-list');
+const cartPanel = document.querySelector('ul.cart__list-item');
 
 function addProduct(data) { //take the element in data array then add into productsPanel
     data.forEach(element => {
@@ -61,11 +62,49 @@ function deleteAllCategory() {
     }
 }
 
+function addCart(data) {
+    data.forEach(async (e) => {
+        const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
+
+        let li = document.createElement('li');
+        li.classList.add('cart__item');
+        let img = document.createElement('img');
+        img.classList.add('cart__list-img');
+        let divHead = document.createElement('div');
+        divHead.classList.add('card__item-head');
+        let h5 = document.createElement('h5');
+        let divPrice = document.createElement('div');
+        divPrice.classList.add('cart__item-allprice');
+        let price = document.createElement('span');
+        price.classList.add('cart__item-price');
+        let x = document.createElement('span');
+        x.classList.add('cart__item-multiply');
+        let quantity = document.createElement('span');
+        quantity.classList.add('cart__item-quantity');
+
+        img.src = ProductsResponse.data.product_photo;
+        h5.innerText = ProductsResponse.data.product_name;
+        price.innerText = ProductsResponse.data.product_price;
+        quantity.innerText = e.quantity;
+        x.innerText = 'x';
+
+        divPrice.append(price, x, quantity);
+        divHead.append(h5, divPrice);
+        li.append(img, divHead);
+        cartPanel.append(li);
+    })
+}
+
 window.addEventListener('load', async () => {
     try {
         const productsResponse = await axios.get('/products');
         const categoriesResponse = await axios.get('/categories');
+        const userResponse = await axios.get('/user');
 
+        if (userResponse.data.user_id) {
+            const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
+            addCart(cartResponse.data);
+        }
         addProduct(productsResponse.data);
         addCategory(categoriesResponse.data);
     } catch (error) {
