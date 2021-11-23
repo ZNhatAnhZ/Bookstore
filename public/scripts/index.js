@@ -95,6 +95,13 @@ function addCart(data) {
     })
 }
 
+function deleteAllCart() {
+    for (let i = 0; i < cartPanel.childNodes.length; i++) {
+        cartPanel.removeChild(cartPanel.childNodes[i]);
+        i--;
+    }
+}
+
 window.addEventListener('load', async () => {
     try {
         const productsResponse = await axios.get('/products');

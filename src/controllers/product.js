@@ -70,11 +70,12 @@ async function addCartItem(req, res) {
                 product_id: id,
                 quantity: quantity
             });
+            res.redirect(`/products/${id}`);
         } else {
-            res.rend('cant add cart')
+            // res.redirect(`/products/${id}`);
         }
     } else {
-        res.rend('not login')
+        // res.redirect(`/products/${id}`);
     }
 }
 
