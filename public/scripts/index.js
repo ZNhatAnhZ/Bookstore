@@ -75,10 +75,20 @@ function addCategory(data) {
         let list = document.createElement('li');
 
         list.classList.add('category-item');
-        link.setAttribute('href', '');
+        link.setAttribute('href', '#');
         link.classList.add('category-item-link');
 
         link.innerText = e.category_name;
+        link.addEventListener('click', async () => {
+            for (let i = 0; i < categoriesPanel.childElementCount; i++) {
+                categoriesPanel.children[i].style.color = 'black';
+            }
+
+            link.style.color = 'rgb(238, 77, 45)';
+            const productResponse = await axios.get(`/products?category=${e.category_name}`);
+            deleteAllProduct();
+            addProduct(productResponse.data);
+        })
 
         list.append(link);
         categoriesPanel.append(list);

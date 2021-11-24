@@ -6,6 +6,7 @@ const shipping = require('../models/shipping');
 const users = require('../models/users');
 const products = require('../models/products');
 const product_review = require('../models/product_review');
+const category = require('../models/category');
 const { Op } = require("sequelize");
 
 function getCurrentDate() {
@@ -49,6 +50,20 @@ async function findProduct(req, res) {
             }
         });
         const data = JSON.stringify(Products, null, 2)
+        res.send(data);
+    } else if (req.query['category'] != null) {
+        const categoryId = await category.findOne({
+            where: {
+                category_name: req.query.category
+            }
+        });
+
+        const Products = await products.findAll({
+            where: {
+                product_category: categoryId.id
+            }
+        });
+        const data = JSON.stringify(Products, null, 2);
         res.send(data);
     } else {
         const allProducts = await products.findAll();
