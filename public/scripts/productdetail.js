@@ -1,6 +1,7 @@
 const imgContainer = document.querySelector('a.home-product');
 const supplierContainer = document.querySelector('div.product-view-sa-supplier');
 const priceContainer = document.querySelector('span.book-item-price-current');
+const priceOld = document.querySelector('span.book-item-price-old');
 const productInfoContainer = document.querySelectorAll('div.book-info-content h6');
 const productInfoDescription = document.querySelector('div.book-info-content p');
 const logo = document.querySelector('div.header__logo');
@@ -70,6 +71,8 @@ window.addEventListener('load', async () => {
         let productPhoto = document.createElement('div');
         let productSupplier = document.createElement('span');
         let productName = document.querySelector('.book-heading');
+        let productID = document.querySelector('.product-id');
+        productID.innerHTML = 'Mã hàng ' + product.data.id;
         productName.innerText = product.data.product_name;
         productPhoto.classList.add('product-img');
         productPhoto.style.backgroundImage = `url(${product.data.product_photo})`;
@@ -81,6 +84,7 @@ window.addEventListener('load', async () => {
         quantityContainer.innerText = quantityContainer.innerText + " " + product.data.quantity;
 
         priceContainer.innerText = product.data.product_price + 'đ';
+        priceOld.innerText = product.data.product_price * 1.5 +'đ';
         productInfoContainer[0].innerText += product.data.id;
         productInfoContainer[1].innerText += user.data.user_name;
         category.data.forEach((e) => {

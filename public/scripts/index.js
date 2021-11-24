@@ -15,30 +15,48 @@ function addProduct(data) { //take the element in data array then add into produ
         img.classList.add('product-item-img');
         let productTitle = document.createElement('h4');
         productTitle.classList.add('product-item-name');
+        //price
         let productPrice = document.createElement('div');
         productPrice.classList.add('product-item-price');
         let productPriceText = document.createElement('span');
         let productOldPrice = document.createElement('span');
+        //rating
         let productItemRating = document.createElement('div');
         let productRatingHeart = document.createElement('span');
         productRatingHeart.classList.add('rating-heart');
         let itemHeart = document.createElement('i');
         itemHeart.classList.add('fa');
         itemHeart.classList.add('fa-heart-o');
-        productRatingHeart.append(itemHeart);
-        productItemRating.append(productRatingHeart);
-        productItemRating.classList.add('product-item-rating');
+        let productRatingStar = document.createElement('span');
+        productRatingStar.classList.add('rating-star');
+        let itemStar = document.createElement('i');
+        itemStar.classList.add('fa');
+        itemStar.classList.add('fa-star');
+        let productNumberSold = document.createElement('span');
+        productNumberSold.classList.add('rating-number-sold');
+        productNumberSold.innerText = 'Số lượng ' + element.quantity;
+        //yeu thich
+        let productItemFavourite = document.createElement('div');
+        productItemFavourite.classList.add('product-item-favourite');
+        let itemCheck = document.createElement('i');
+        itemCheck.classList.add('fa');
+        itemCheck.classList.add('fa-check');
+        productItemFavourite.append(itemCheck, 'Yêu thích');
 
+        productItemRating.classList.add('product-item-rating');
+        productOldPrice.classList.add('product-item-price-old');
         productPriceText.classList.add('product-item-price-current');
         productLink.setAttribute('href', `/products/${element.id}`);
         img.style.backgroundImage = `url(${element.product_photo})`;
         productTitle.innerText = element.product_name;
-        productPriceText.innerText = element.product_price + 'd';
-        productOldPrice.innerText = element.product_price * 1.5;
+        productPriceText.innerText = element.product_price + 'đ';
+        productOldPrice.innerText = element.product_price * 1.5 + 'đ';
 
-        
+        productRatingStar.append(itemStar);
+        productRatingHeart.append(itemHeart);
+        productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
         productPrice.append(productOldPrice, productPriceText);
-        productLink.append(img, productTitle, productPrice, productItemRating);
+        productLink.append(img, productTitle, productPrice, productItemRating, productItemFavourite);
         product.append(productLink);
         productsPanel.firstElementChild.append(product);
     });
