@@ -3,7 +3,6 @@ const orders = require('../models/orders');
 const order_items = require('../models/order_items');
 const payments = require('../models/payments');
 const shipping = require('../models/shipping');
-const products = require('../models/products');
 const users = require('../models/users');
 
 function getCurrentDate() {

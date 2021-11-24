@@ -25,10 +25,58 @@ cartItemBtn.addEventListener('click', async() => {
     const userResponse = await axios.get('/user');
     window.location = `/cart/${userResponse.data.user_id}`;
 });
+const buyNowButton = document.querySelector('.btn-buy-now');
+const addCommentButton = document.querySelector('.add-comment');
+const commentInput = document.querySelector('.form-control');
+const commentPanel = document.querySelector('#commentPanel');
 
 function cartAddItemsNotification() {
 
 
+}
+
+function loadComment(data) {
+    data.forEach(async (e) => {
+        const userResponse = await axios.get(`/user?id=${e.review_by}`);
+
+        let Div = document.createElement('div');
+
+        let userDiv = document.createElement('div');
+        userDiv.classList.add('box');
+        let userAvtDiv = document.createElement('div');
+        userAvtDiv.classList.add('box');
+        userAvtDiv.style.float = 'left';
+        let userAvt = document.createElement('img');
+        userAvt.src = 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png';
+        userAvt.style.height = '30px';
+        userAvt.style.width = '30px';
+
+        userAvtDiv.append(userAvt);
+
+        let userNameDiv = document.createElement('div');
+        userNameDiv.classList.add('box');
+        userNameDiv.style.marginLeft = '40px';
+        let userName = document.createElement('h5');
+        userName.innerText = userResponse.data.user_name;
+
+        userNameDiv.append(userName);
+        userDiv.append(userAvtDiv, userNameDiv);
+
+        let commentDiv = document.createElement('div');
+        commentDiv.classList.add('box');
+        commentDiv.style.paddingLeft = '40px';
+        commentDiv.style.width = '50%';
+        let commentDate = document.createElement('h6');
+        commentDate.innerText = e.review_date;
+        let comment = document.createElement('p');
+        comment.innerText = e.comment;
+
+        commentDiv.append(commentDate, comment);
+        let linebreak = document.createElement('br');
+
+        Div.append(userDiv, commentDiv, linebreak);
+        commentPanel.append(Div);
+    })
 }
 
 function addCart(data) {
@@ -36,6 +84,8 @@ function addCart(data) {
     data.forEach(async (e) => {
         countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
+
+
         let li = document.createElement('li');
         li.classList.add('cart__item');
         let img = document.createElement('img');
@@ -81,6 +131,7 @@ window.addEventListener('load', async () => {
         const user = await axios.get(`/user?id=${product.data.provider_id}`);
         const category = await axios.get(`/categories?id=${product.data.product_category}`);
         const userResponse = await axios.get('/user');
+        const commentResponse = await axios.get(`/products/comment/${id}`);
         if (userResponse.data.user_id) {
             const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
             addCart(cartResponse.data);
@@ -102,14 +153,14 @@ window.addEventListener('load', async () => {
         quantityContainer.innerText = quantityContainer.innerText + " " + product.data.quantity;
 
         priceContainer.innerText = product.data.product_price + 'đ';
-        priceOld.innerText = product.data.product_price * 1.5 +'đ';
+        priceOld.innerText = product.data.product_price * 1.5 + 'đ';
         productInfoContainer[0].innerText += product.data.id;
         productInfoContainer[1].innerText += user.data.user_name;
         category.data.forEach((e) => {
             productInfoContainer[2].innerText += e.category_name;
         })
         productInfoDescription.innerText = product.data.product_details;
-
+        loadComment(commentResponse.data);
 
     } catch (error) {
         console.log(error);
@@ -139,6 +190,43 @@ addCartButton.addEventListener('click', async () => {
         const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
         deleteAllCart();
         addCart(cartResponse.data);
+    } else {
+        window.location = `/login?origin=/products/${id}`;
+    }
+})
+
+buyNowButton.addEventListener('click', async () => {
+    const userResponse = await axios.get('/user');
+    const id = window.location.pathname.slice(10);
+    if (userResponse.data.user_id) {
+        try {
+            const data = await axios.post(`/products/buy/${id}`, {
+                quantity: Qty.value
+            });
+        } catch (error) {
+            console.log(error);
+        };
+    } else {
+        window.location = `/login?origin=/products/${id}`;
+    }
+})
+
+addCommentButton.parentElement.addEventListener('submit', (e) => {
+    e.preventDefault();
+})
+
+addCommentButton.addEventListener('click', async () => {
+    const userResponse = await axios.get('/user');
+    const id = window.location.pathname.slice(10);
+    if (userResponse.data.user_id) {
+        try {
+            const data = await axios.post(`/products/comment/${id}`, {
+                comment: commentInput.value
+            });
+        } catch (error) {
+            console.log(error);
+        };
+        window.location = `/products/${id}`;
     } else {
         window.location = `/login?origin=/products/${id}`;
     }
