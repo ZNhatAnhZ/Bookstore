@@ -65,7 +65,8 @@ window.addEventListener('load', async () => {
 
         let productPhoto = document.createElement('div');
         let productSupplier = document.createElement('span');
-
+        let productName = document.querySelector('.book-heading');
+        productName.innerText = product.data.product_name;
         productPhoto.classList.add('product-img');
         // sua anh
         productPhoto.style.backgroundImage = `url(${product.data.product_photo})`;

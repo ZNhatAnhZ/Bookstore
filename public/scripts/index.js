@@ -18,14 +18,27 @@ function addProduct(data) { //take the element in data array then add into produ
         let productPrice = document.createElement('div');
         productPrice.classList.add('product-item-price');
         let productPriceText = document.createElement('span');
+        let productOldPrice = document.createElement('span');
+        let productItemRating = document.createElement('div');
+        let productRatingHeart = document.createElement('span');
+        productRatingHeart.classList.add('rating-heart');
+        let itemHeart = document.createElement('i');
+        itemHeart.classList.add('fa');
+        itemHeart.classList.add('fa-heart-o');
+        productRatingHeart.append(itemHeart);
+        productItemRating.append(productRatingHeart);
+        productItemRating.classList.add('product-item-rating');
+
         productPriceText.classList.add('product-item-price-current');
         productLink.setAttribute('href', `/products/${element.id}`);
         img.style.backgroundImage = `url(${element.product_photo})`;
         productTitle.innerText = element.product_name;
-        productPriceText.innerText = element.product_price;
+        productPriceText.innerText = element.product_price + 'd';
+        productOldPrice.innerText = element.product_price * 1.5;
 
-        productPrice.append(productPriceText);
-        productLink.append(img, productTitle, productPrice);
+        
+        productPrice.append(productOldPrice, productPriceText);
+        productLink.append(img, productTitle, productPrice, productItemRating);
         product.append(productLink);
         productsPanel.firstElementChild.append(product);
     });
