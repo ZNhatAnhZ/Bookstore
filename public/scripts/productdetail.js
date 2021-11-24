@@ -11,6 +11,10 @@ const subQtyButton = document.querySelector('.btn-subtract-qty');
 const Qty = document.querySelector('.qty');
 const addCartButton = document.querySelector('.btn-cart-to-cart');
 
+function cartAddItemsNotification() {
+
+}
+
 function addCart(data) {
     data.forEach(async (e) => {
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
@@ -68,7 +72,6 @@ window.addEventListener('load', async () => {
         let productName = document.querySelector('.book-heading');
         productName.innerText = product.data.product_name;
         productPhoto.classList.add('product-img');
-        // sua anh
         productPhoto.style.backgroundImage = `url(${product.data.product_photo})`;
         imgContainer.append(productPhoto);
 
@@ -100,20 +103,22 @@ subQtyButton.addEventListener('click', () => {
 })
 
 addCartButton.addEventListener('click', async () => {
-    const id = window.location.pathname.slice(10);
-    try {
-        const data = await axios.post(`/products/${id}`, {
-            quantity: Qty.value
-        });
-    } catch (error) {
-        console.log(error);
-    };
-
     const userResponse = await axios.get('/user');
+    const id = window.location.pathname.slice(10);
     if (userResponse.data.user_id) {
+        try {
+            const data = await axios.post(`/products/${id}`, {
+                quantity: Qty.value
+            });
+
+        } catch (error) {
+            console.log(error);
+        };
         const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
         deleteAllCart();
         addCart(cartResponse.data);
+    } else {
+        window.location = `/login?origin=/products/${id}`;
     }
 })
 

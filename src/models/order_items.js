@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 require('../database/connection');
 
-module.exports = sequelize.define('category', {
+module.exports = sequelize.define('order_items', {
     order_id: {
         type: DataTypes.INTEGER,
         allowNull: false
