@@ -52,7 +52,7 @@ function addProduct(data) { //take the element in data array then add into produ
         productPriceText.innerText = element.product_price + 'đ';
         productOldPrice.innerText = element.product_price * 1.5 + 'đ';
 
-        productRatingStar.append(itemStar);
+        productRatingStar.append(itemStar, itemStar);
         productRatingHeart.append(itemHeart);
         productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
         productPrice.append(productOldPrice, productPriceText);
