@@ -1,4 +1,6 @@
 const mainCartPanel = document.querySelector('div.product-body-main');
+const payAllPrice1 = document.querySelector('#pay-all-price');
+const payAllPrice2 = document.querySelector('div.pay-all-price');
 let totalAmount = 0;
 
 function deleteAllCartItems() {
@@ -6,6 +8,9 @@ function deleteAllCartItems() {
         mainCartPanel.removeChild(mainCartPanel.childNodes[i]);
         i--;
     }
+    totalAmount = 0;
+    payAllPrice1.innerText = totalAmount + "đ";
+    payAllPrice2.innerText = totalAmount + "đ";
 }
 
 function addMainCart(data) {
@@ -104,8 +109,7 @@ function addMainCart(data) {
         bodyProduct.append(cartId, mainBodyImgAndText, seeMoreDiv, productPriceDiv, productQuantityDiv, productPriceAllDiv, productDeleteDiv);
         mainCartPanel.append(bodyProduct);
 
-        const payAllPrice1 = document.querySelector('#pay-all-price');
-        const payAllPrice2 = document.querySelector('div.pay-all-price');
+
 
         payAllPrice1.innerText = totalAmount + "đ";
         payAllPrice2.innerText = totalAmount + "đ";
