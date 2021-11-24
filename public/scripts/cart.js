@@ -1,9 +1,20 @@
 const mainCartPanel = document.querySelector('div.product-body-main');
 let totalAmount = 0;
 
+function deleteAllCartItems() {
+    for (let i = 0; i < mainCartPanel.childNodes.length; i++) {
+        mainCartPanel.removeChild(mainCartPanel.childNodes[i]);
+        i--;
+    }
+}
+
 function addMainCart(data) {
     data.forEach(async (e) => {
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
+
+        const cartId = document.createElement('span');
+        cartId.innerText = e.id;
+        cartId.style.display = 'none';
 
         const bodyProduct = document.createElement('div');
         bodyProduct.classList.add('body-main-product');
@@ -59,13 +70,30 @@ function addMainCart(data) {
 
         productPriceAll.innerText = e.quantity * ProductsResponse.data.product_price + "đ";
         totalAmount = totalAmount + e.quantity * ProductsResponse.data.product_price;
-        console.log(totalAmount);
         productPriceAllDiv.append(productPriceAll);
 
         const productDeleteDiv = document.createElement('div');
         productDeleteDiv.classList.add('main-product-delete');
         const productDeleteButton = document.createElement('button');
         productDeleteButton.classList.add('product-delete-btn');
+        productDeleteButton.addEventListener('click', async () => {
+            const id = window.location.pathname.slice(6);
+            try {
+                const data = await axios.post(`/cart/${id}`, {
+                    cart_id: e.id
+                })
+
+                const userResponse = await axios.get('/user');
+                if (userResponse.data.user_id) {
+                    const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
+                    deleteAllCartItems();
+                    addMainCart(cartResponse.data);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+        })
 
         productDeleteButton.innerText = 'Xóa sản phẩm';
         productDeleteDiv.append(productDeleteButton);
@@ -73,7 +101,7 @@ function addMainCart(data) {
         const lineBreak = document.createElement('div');
         lineBreak.classList.add('_2aRlry');
 
-        bodyProduct.append(mainBodyImgAndText, seeMoreDiv, productPriceDiv, productQuantityDiv, productPriceAllDiv, productDeleteDiv);
+        bodyProduct.append(cartId, mainBodyImgAndText, seeMoreDiv, productPriceDiv, productQuantityDiv, productPriceAllDiv, productDeleteDiv);
         mainCartPanel.append(bodyProduct);
 
         const payAllPrice1 = document.querySelector('#pay-all-price');

@@ -35,9 +35,24 @@ async function renderCart(req, res) {
     }
 }
 
+async function deleteCartItems(req, res) {
+    let { id } = req.params;
+    if (req.session.user_id != null && id == req.session.user_id) {
+        const { cart_id } = req.body;
 
+        await cart_items.destroy({
+            where: {
+                id: cart_id
+            }
+        });
+        res.redirect(`/cart/${id}`);
+    } else {
+        res.send({});
+    }
+}
 
 module.exports = {
     getCartItemByUserId,
-    renderCart
+    renderCart,
+    deleteCartItems
 }
