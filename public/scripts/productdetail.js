@@ -11,6 +11,7 @@ const addQtyButton = document.querySelector('.btn-add-qty');
 const subQtyButton = document.querySelector('.btn-subtract-qty');
 const Qty = document.querySelector('.qty');
 const addCartButton = document.querySelector('.btn-cart-to-cart');
+const buyNowButton = document.querySelector('.btn-buy-now');
 
 function cartAddItemsNotification() {
 
@@ -84,7 +85,7 @@ window.addEventListener('load', async () => {
         quantityContainer.innerText = quantityContainer.innerText + " " + product.data.quantity;
 
         priceContainer.innerText = product.data.product_price + 'đ';
-        priceOld.innerText = product.data.product_price * 1.5 +'đ';
+        priceOld.innerText = product.data.product_price * 1.5 + 'đ';
         productInfoContainer[0].innerText += product.data.id;
         productInfoContainer[1].innerText += user.data.user_name;
         category.data.forEach((e) => {
@@ -121,6 +122,22 @@ addCartButton.addEventListener('click', async () => {
         const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
         deleteAllCart();
         addCart(cartResponse.data);
+    } else {
+        window.location = `/login?origin=/products/${id}`;
+    }
+})
+
+buyNowButton.addEventListener('click', async () => {
+    const userResponse = await axios.get('/user');
+    const id = window.location.pathname.slice(10);
+    if (userResponse.data.user_id) {
+        try {
+            const data = await axios.post(`/products/buy/${id}`, {
+                quantity: Qty.value
+            });
+        } catch (error) {
+            console.log(error);
+        };
     } else {
         window.location = `/login?origin=/products/${id}`;
     }
