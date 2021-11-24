@@ -92,8 +92,11 @@ function deleteAllCategory() {
     }
 }
 
+
 function addCart(data) {
+    let countProduct = 0;
     data.forEach(async (e) => {
+        countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
 
         let li = document.createElement('li');
@@ -123,7 +126,9 @@ function addCart(data) {
         li.append(img, divHead);
         cartPanel.append(li);
     })
+    console.log(countProduct);
 }
+
 
 function deleteAllCart() {
     for (let i = 0; i < cartPanel.childNodes.length; i++) {
