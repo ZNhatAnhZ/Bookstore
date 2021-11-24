@@ -1,6 +1,7 @@
 const mainCartPanel = document.querySelector('div.product-body-main');
 const payAllPrice1 = document.querySelector('#pay-all-price');
 const payAllPrice2 = document.querySelector('div.pay-all-price');
+const buyAllButton = document.querySelector('button.content-buy-btn');
 let totalAmount = 0;
 
 function deleteAllCartItems() {
@@ -128,3 +129,17 @@ window.addEventListener('load', async () => {
         console.log(error);
     }
 });
+
+buyAllButton.addEventListener('click', async () => {
+    try {
+        const userResponse = await axios.get('/user');
+        if (userResponse.data.user_id) {
+            const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
+            const data = await axios.post(`/cart/${userResponse.data.user_id}`, { totalAmount: totalAmount });
+
+            location.reload();
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})

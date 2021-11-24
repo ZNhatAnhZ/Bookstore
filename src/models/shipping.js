@@ -16,7 +16,7 @@ module.exports = sequelize.define('shipping', {
     },
     shipped_date: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     }
 }, {
     // Other model options go here
