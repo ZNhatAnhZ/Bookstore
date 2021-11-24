@@ -11,12 +11,27 @@ const addQtyButton = document.querySelector('.btn-add-qty');
 const subQtyButton = document.querySelector('.btn-subtract-qty');
 const Qty = document.querySelector('.qty');
 const addCartButton = document.querySelector('.btn-cart-to-cart');
+let headerCartNumber = document.querySelector('span.header__cart-number');
+headerCartNumber.innerText = 0;
+
+let headerCartList = document.querySelector('div.header__cart-list');
+let cartFoot = document.createElement('div');
+cartFoot.classList.add('cart__foot');
+let cartItemBtn = document.createElement('button');
+cartItemBtn.classList.add('cart__item-btn');
+cartItemBtn.innerText = 'Xem giỏ hàng';
+cartFoot.append(cartItemBtn);
+cartItemBtn.addEventListener('click', async() => {
+    const userResponse = await axios.get('/user');
+    window.location = `/cart/${userResponse.data.user_id}`;
+});
 const buyNowButton = document.querySelector('.btn-buy-now');
 const addCommentButton = document.querySelector('.add-comment');
 const commentInput = document.querySelector('.form-control');
 const commentPanel = document.querySelector('#commentPanel');
 
 function cartAddItemsNotification() {
+
 
 }
 
@@ -65,7 +80,9 @@ function loadComment(data) {
 }
 
 function addCart(data) {
+    let countProduct = 0;
     data.forEach(async (e) => {
+        countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
 
 
@@ -96,6 +113,8 @@ function addCart(data) {
         li.append(img, divHead);
         cartPanel.append(li);
     })
+    headerCartNumber.innerText = countProduct;
+    headerCartList.append(cartFoot);
 }
 
 function deleteAllCart() {

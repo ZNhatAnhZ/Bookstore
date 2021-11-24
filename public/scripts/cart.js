@@ -113,7 +113,7 @@ function addMainCart(data) {
 
 
         payAllPrice1.innerText = totalAmount + "đ";
-        payAllPrice2.innerText = totalAmount + "đ";
+        payAllPrice2.innerText = totalAmount + 30000 + "đ";
     })
 
 }
