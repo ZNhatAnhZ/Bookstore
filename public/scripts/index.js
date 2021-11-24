@@ -4,6 +4,20 @@ const body = document.querySelector('body');
 const productsPanel = document.querySelector('div.home-product');
 const categoriesPanel = document.querySelector('ul.category-list');
 const cartPanel = document.querySelector('ul.cart__list-item');
+let headerCartNumber = document.querySelector('span.header__cart-number');
+headerCartNumber.innerText = 0;
+// xem tat ca
+let headerCartList = document.querySelector('div.header__cart-list');
+let cartFoot = document.createElement('div');
+cartFoot.classList.add('cart__foot');
+let cartItemBtn = document.createElement('button');
+cartItemBtn.classList.add('cart__item-btn');
+cartItemBtn.innerText = 'Xem giỏ hàng';
+cartFoot.append(cartItemBtn);
+cartItemBtn.addEventListener('click', async() => {
+    const userResponse = await axios.get('/user');
+    window.location = `/cart/${userResponse.data.user_id}`;
+});
 
 function addProduct(data) { //take the element in data array then add into productsPanel
     data.forEach(element => {
@@ -32,6 +46,21 @@ function addProduct(data) { //take the element in data array then add into produ
         let itemStar = document.createElement('i');
         itemStar.classList.add('fa');
         itemStar.classList.add('fa-star');
+        let itemStar1 = document.createElement('i');
+        itemStar1.classList.add('fa');
+        itemStar1.classList.add('fa-star');
+        let itemStar2 = document.createElement('i');
+        itemStar2.classList.add('fa');
+        itemStar2.classList.add('fa-star');
+        let itemStar3 = document.createElement('i');
+        itemStar3.classList.add('fa');
+        itemStar3.classList.add('fa-star');
+        let itemStar4 = document.createElement('i');
+        itemStar4.classList.add('fa');
+        itemStar4.classList.add('fa-star');
+        let itemStar5 = document.createElement('i');
+        itemStar5.classList.add('fa');
+        itemStar5.classList.add('fa-star-o');
         let productNumberSold = document.createElement('span');
         productNumberSold.classList.add('rating-number-sold');
         productNumberSold.innerText = 'Số lượng ' + element.quantity;
@@ -52,7 +81,7 @@ function addProduct(data) { //take the element in data array then add into produ
         productPriceText.innerText = element.product_price + 'đ';
         productOldPrice.innerText = element.product_price * 1.5 + 'đ';
 
-        productRatingStar.append(itemStar, itemStar);
+        productRatingStar.append(itemStar, itemStar1, itemStar2, itemStar3, itemStar4);
         productRatingHeart.append(itemHeart);
         productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
         productPrice.append(productOldPrice, productPriceText);
@@ -98,7 +127,7 @@ function addCart(data) {
     data.forEach(async (e) => {
         countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
-
+        
         let li = document.createElement('li');
         li.classList.add('cart__item');
         let img = document.createElement('img');
@@ -126,7 +155,8 @@ function addCart(data) {
         li.append(img, divHead);
         cartPanel.append(li);
     })
-    console.log(countProduct);
+    headerCartNumber.innerText = countProduct;
+    headerCartList.append(cartFoot);
 }
 
 
