@@ -5,6 +5,7 @@ const payments = require('../models/payments');
 const shipping = require('../models/shipping');
 const users = require('../models/users');
 const products = require('../models/products');
+const product_review = require('../models/product_review');
 const { Op } = require("sequelize");
 
 function getCurrentDate() {
@@ -141,11 +142,43 @@ async function buyProduct(req, res) {
     }
 }
 
+async function addComment(req, res) {
+    let { id } = req.params;
+    const { comment } = req.body;
+    if (req.session.user_id != null) {
+        const newComment = product_review.create({
+            review_product_id: id,
+            review_by: req.session.user_id,
+            rating: 5,
+            comment: comment,
+            review_date: getCurrentDate()
+        });
+
+        res.redirect(`/products/${id}`);
+    } else {
+        res.send({});
+    }
+}
+
+async function loadComment(req, res) {
+    let { id } = req.params;
+
+    const comment = await product_review.findAll({
+        where: {
+            review_product_id: id
+        }
+    });
+    const data = JSON.stringify(comment, null, 2)
+    res.send(data);
+}
+
 module.exports = {
     findProduct,
     renderProduct,
     addCartItem,
-    buyProduct
+    buyProduct,
+    addComment,
+    loadComment
 }
 
 
