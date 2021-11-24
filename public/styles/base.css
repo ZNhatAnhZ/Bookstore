@@ -95,3 +95,14 @@ html {
     line-height: 34px;
 }
 
+.grid-column-4{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 40%;
+}
+
+.grid-column-6{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 60%;
+}
