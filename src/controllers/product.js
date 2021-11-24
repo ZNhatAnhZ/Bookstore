@@ -1,5 +1,6 @@
 const products = require('../models/products');
 const users = require('../models/users');
+const cart_items = require('../models/cart_items');
 const { Op } = require("sequelize");
 
 async function findProduct(req, res) {
@@ -48,9 +49,40 @@ async function renderProduct(req, res) {
     res.render('productdetail.ejs', { loginCheck, username });
 }
 
+async function addCartItem(req, res) {
+    let { id } = req.params;
+    if (req.session.user_id != null) {
+        const userData = await users.findOne({
+            where: {
+                id: req.session.user_id
+            }
+        })
+        const productData = await products.findOne({
+            where: {
+                id: id
+            }
+        })
+        const { quantity } = req.body;
+
+        if (userData && productData) {
+            const newCartItems = await cart_items.create({
+                user_id: req.session.user_id,
+                product_id: id,
+                quantity: quantity
+            });
+            res.redirect(`/products/${id}`);
+        } else {
+            // res.redirect(`/products/${id}`);
+        }
+    } else {
+        // res.redirect(`/products/${id}`);
+    }
+}
+
 module.exports = {
     findProduct,
-    renderProduct
+    renderProduct,
+    addCartItem
 }
 
 

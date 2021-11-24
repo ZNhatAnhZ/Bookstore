@@ -5,6 +5,11 @@ const productInfoContainer = document.querySelectorAll('div.book-info-content h6
 const productInfoDescription = document.querySelector('div.book-info-content p');
 const logo = document.querySelector('div.header__logo');
 const cartPanel = document.querySelector('ul.cart__list-item');
+const quantityContainer = document.querySelector('.product-view-sa-author span');
+const addQtyButton = document.querySelector('.btn-add-qty');
+const subQtyButton = document.querySelector('.btn-subtract-qty');
+const Qty = document.querySelector('.qty');
+const addCartButton = document.querySelector('.btn-cart-to-cart');
 
 function addCart(data) {
     data.forEach(async (e) => {
@@ -39,6 +44,13 @@ function addCart(data) {
     })
 }
 
+function deleteAllCart() {
+    for (let i = 0; i < cartPanel.childNodes.length; i++) {
+        cartPanel.removeChild(cartPanel.childNodes[i]);
+        i--;
+    }
+}
+
 window.addEventListener('load', async () => {
     try {
         const id = window.location.pathname.slice(10);
@@ -62,6 +74,8 @@ window.addEventListener('load', async () => {
         productSupplier.innerText = user.data.user_name;
         supplierContainer.appendChild(productSupplier);
 
+        quantityContainer.innerText = quantityContainer.innerText + " " + product.data.quantity;
+
         priceContainer.innerText = product.data.product_price + 'đ';
         productInfoContainer[0].innerText += product.data.id;
         productInfoContainer[1].innerText += user.data.user_name;
@@ -75,5 +89,31 @@ window.addEventListener('load', async () => {
         console.log(error);
     }
 });
+
+addQtyButton.addEventListener('click', () => {
+    Qty.value++;
+})
+
+subQtyButton.addEventListener('click', () => {
+    Qty.value--;
+})
+
+addCartButton.addEventListener('click', async () => {
+    const id = window.location.pathname.slice(10);
+    try {
+        const data = await axios.post(`/products/${id}`, {
+            quantity: Qty.value
+        });
+    } catch (error) {
+        console.log(error);
+    };
+
+    const userResponse = await axios.get('/user');
+    if (userResponse.data.user_id) {
+        const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
+        deleteAllCart();
+        addCart(cartResponse.data);
+    }
+})
 
 logo.firstElementChild.setAttribute('href', '/');
