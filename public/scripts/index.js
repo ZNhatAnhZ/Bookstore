@@ -6,6 +6,7 @@ const categoriesPanel = document.querySelector('ul.category-list');
 const cartPanel = document.querySelector('ul.cart__list-item');
 let headerCartNumber = document.querySelector('span.header__cart-number');
 let oldPage = 1;
+const allPage = document.querySelector('.all-page-num');
 
 
 //filtering
@@ -332,6 +333,7 @@ const paginationPanel = document.querySelector('.pagination');
 
 function addPagination() {
     deleteAllPagination();
+    allPage.innerText = getNumPages();
     for (let i = 1; i <= getNumPages(); i++) {
         const pagination = document.createElement('li');
         pagination.classList.add('pagination-item');

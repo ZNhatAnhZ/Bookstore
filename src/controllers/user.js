@@ -1,4 +1,5 @@
 const users = require('../models/users');
+const bcrypt = require('bcrypt');
 
 async function findUser(req, res) {
     if (req.query['id'] != null) {
@@ -34,7 +35,47 @@ async function renderUser(req, res) {
     }
 }
 
+async function changePassword(req, res) {
+    let { id } = req.params;
+    if (req.session.user_id && id == req.session.user_id) {
+        let { password, newpassword } = req.body;
+        const user = await users.findOne({
+            where: {
+                id: req.session.user_id
+            }
+        });
+
+        if (user != null) {
+            const validPassword = await bcrypt.compare(password, user.dataValues.password);
+            const hash = await bcrypt.hash(newpassword, 12);
+            if (validPassword) {
+                await user.update({
+                    password: hash
+                }, {
+                    where: {
+                        id: req.session.user_id
+                    }
+                });
+                let isSucceed = true;
+                res.send({ isSucceed });
+            } else {
+                let isSucceed = false;
+                res.send({ isSucceed });
+            }
+        } else {
+            let isSucceed = false;
+            res.send({ isSucceed });
+        }
+        // username = user.dataValues.user_name;
+        // res.render('user-info.ejs', { username });
+        // res.end();
+    } else {
+        // res.send('unable to connect');
+    }
+}
+
 module.exports = {
     findUser,
-    renderUser
+    renderUser,
+    changePassword
 }

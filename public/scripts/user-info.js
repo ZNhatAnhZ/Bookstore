@@ -3,6 +3,7 @@ const usernameContainer2 = document.querySelector('div.user-info-name');
 const logo = document.querySelector('div.header__logo');
 const cartPanel = document.querySelector('ul.cart__list-item');
 
+
 function addCart(data) {
     data.forEach(async (e) => {
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
@@ -51,10 +52,68 @@ window.addEventListener('load', async () => {
         let usernameDiv2 = document.createElement('p');
         usernameDiv1.innerText = userResponse.data.user_name;
         usernameDiv2.innerText = userResponse.data.user_name;
-        usernameContainer1.append(usernameDiv1);
+        // usernameContainer1.append(usernameDiv1);
         usernameContainer2.firstElementChild.before(usernameDiv2)
     } catch (error) {
         console.log(error);
     }
 });
 logo.firstElementChild.setAttribute('href', '/');
+
+
+//changing password
+const saveForm = document.querySelector('.save-foot-form-btn');
+const currentPasswordInput = document.querySelector('#currentPasswordInput');
+const newPasswordInput = document.querySelector('#newPasswordInput');
+const confirmPasswordInput = document.querySelector('#confirmPasswordInput');
+const alertPassword = document.querySelector('.user-forgot-password');
+
+alertPassword.sty
+
+saveForm.parentElement.parentElement.addEventListener('submit', (e) => {
+    e.preventDefault();
+})
+
+
+
+saveForm.addEventListener('click', async () => {
+    const id = window.location.pathname.slice(6);
+    if (currentPasswordInput.value != "" || newPasswordInput.value != "" || confirmPasswordInput.value != "") {
+        if (newPasswordInput.value == confirmPasswordInput.value) {
+            const passwordResponse = await axios.post(`/user/${id}`, {
+                password: currentPasswordInput.value,
+                newpassword: newPasswordInput.value
+            });
+            if (passwordResponse.data.isSucceed) {
+                alertPassword.innerText = 'đổi mật khẩu thành công!';
+                alertPassword.style.color = '#4BB543';
+
+                currentPasswordInput.value = "";
+                newPasswordInput.value = "";
+                confirmPasswordInput.value = "";
+            } else {
+                alertPassword.innerText = 'sai mật khẩu cũ!';
+                alertPassword.style.color = 'rgb(243, 32, 19)';
+
+                currentPasswordInput.value = "";
+                newPasswordInput.value = "";
+                confirmPasswordInput.value = "";
+            }
+
+        } else {
+            alertPassword.innerText = 'xác nhận mật khẩu không khớp!';
+            alertPassword.style.color = 'rgb(243, 32, 19)';
+
+            currentPasswordInput.value = "";
+            newPasswordInput.value = "";
+            confirmPasswordInput.value = "";
+        }
+    } else {
+        alertPassword.innerText = 'sai form!';
+        alertPassword.style.color = 'rgb(243, 32, 19)';
+
+        currentPasswordInput.value = "";
+        newPasswordInput.value = "";
+        confirmPasswordInput.value = "";
+    }
+})
