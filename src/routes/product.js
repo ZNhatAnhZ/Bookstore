@@ -9,6 +9,7 @@ router.post('/:id', authorization.isLoggedin, productController.addCartItem);
 router.post('/buy/:id', authorization.isLoggedin, productController.buyProduct);
 router.post('/comment/:id', authorization.isLoggedin, productController.addComment);
 router.get('/comment/:id', productController.loadComment);
+router.get('/order/:order', productController.getAllProductbyCondition);
 
 module.exports = router
 

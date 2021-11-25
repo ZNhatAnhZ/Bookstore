@@ -187,13 +187,44 @@ async function loadComment(req, res) {
     res.send(data);
 }
 
+async function getAllProductbyCondition(req, res) {
+    const { order } = req.params;
+    if (order == 'new') {
+        const Products = await products.findAll({
+            order: [['id', 'DESC']]
+        });
+        const data = JSON.stringify(Products, null, 2);
+        res.send(data);
+    } else if (order == 'sale') {
+        const Products = await products.findAll({
+            order: [['quantity', 'ASC']]
+        });
+        const data = JSON.stringify(Products, null, 2);
+        res.send(data);
+    } else if (order == 'asc') {
+        const Products = await products.findAll({
+            order: [['product_price', 'ASC']]
+        });
+        const data = JSON.stringify(Products, null, 2);
+        res.send(data);
+    } else if (order == 'desc') {
+        const Products = await products.findAll({
+            order: [['product_price', 'DESC']]
+        });
+        const data = JSON.stringify(Products, null, 2);
+        res.send(data);
+    }
+
+}
+
 module.exports = {
     findProduct,
     renderProduct,
     addCartItem,
     buyProduct,
     addComment,
-    loadComment
+    loadComment,
+    getAllProductbyCondition
 }
 
 

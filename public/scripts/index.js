@@ -5,6 +5,62 @@ const productsPanel = document.querySelector('div.home-product');
 const categoriesPanel = document.querySelector('ul.category-list');
 const cartPanel = document.querySelector('ul.cart__list-item');
 let headerCartNumber = document.querySelector('span.header__cart-number');
+
+const orderNormalButton = document.querySelector('#orderNormal');
+const orderNewButton = document.querySelector('#orderNew');
+const orderSaleButton = document.querySelector('#orderSale');
+const orderAscButton = document.querySelector('#orderAsc');
+const orderDescButton = document.querySelector('#orderDesc');
+
+function resetSelectFilter() {
+    orderNormalButton.classList.remove('filter-button-active');
+    orderNewButton.classList.remove('filter-button-active');
+    orderSaleButton.classList.remove('filter-button-active');
+
+    orderAscButton.style.background = 'white';
+    orderDescButton.style.background = 'white';
+}
+
+orderNormalButton.addEventListener('click', async () => {
+    resetSelectFilter();
+    orderNormalButton.classList.add('filter-button-active');
+    const productsResponse = await axios.get('/products');
+    deleteAllProduct();
+    addProduct(productsResponse.data);
+})
+
+orderNewButton.addEventListener('click', async () => {
+    resetSelectFilter();
+    orderNewButton.classList.add('filter-button-active');
+    const productsResponse = await axios.get('/products/order/new');
+    deleteAllProduct();
+    addProduct(productsResponse.data);
+})
+
+orderSaleButton.addEventListener('click', async () => {
+    resetSelectFilter();
+    orderSaleButton.classList.add('filter-button-active');
+    const productsResponse = await axios.get('/products/order/sale');
+    deleteAllProduct();
+    addProduct(productsResponse.data);
+})
+
+orderAscButton.addEventListener('click', async () => {
+    resetSelectFilter();
+    orderAscButton.style.background = 'rgba(0, 0, 0, 0.06)';
+    const productsResponse = await axios.get('/products/order/asc');
+    deleteAllProduct();
+    addProduct(productsResponse.data);
+})
+
+orderDescButton.addEventListener('click', async () => {
+    resetSelectFilter();
+    orderDescButton.style.background = 'rgba(0, 0, 0, 0.06)';
+    const productsResponse = await axios.get('/products/order/desc');
+    deleteAllProduct();
+    addProduct(productsResponse.data);
+})
+
 headerCartNumber.innerText = 0;
 // xem tat ca
 let headerCartList = document.querySelector('div.header__cart-list');
