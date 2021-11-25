@@ -5,6 +5,10 @@ const productsPanel = document.querySelector('div.home-product');
 const categoriesPanel = document.querySelector('ul.category-list');
 const cartPanel = document.querySelector('ul.cart__list-item');
 let headerCartNumber = document.querySelector('span.header__cart-number');
+let oldPage = 1;
+
+
+//filtering
 
 const orderNormalButton = document.querySelector('#orderNormal');
 const orderNewButton = document.querySelector('#orderNew');
@@ -61,8 +65,9 @@ orderDescButton.addEventListener('click', async () => {
     addProduct(productsResponse.data);
 })
 
-headerCartNumber.innerText = 0;
+
 // xem tat ca
+headerCartNumber.innerText = 0;
 let headerCartList = document.querySelector('div.header__cart-list');
 let cartFoot = document.createElement('div');
 cartFoot.classList.add('cart__foot');
@@ -76,6 +81,8 @@ cartItemBtn.addEventListener('click', async () => {
 });
 
 function addProduct(data) { //take the element in data array then add into productsPanel
+    let count = 0;
+    oldPage = 1;
     data.forEach(element => {
         let product = document.createElement('div');
         product.classList.add('grid-column-new2');
@@ -144,7 +151,15 @@ function addProduct(data) { //take the element in data array then add into produ
         productLink.append(img, productTitle, productPrice, productItemRating, productItemFavourite);
         product.append(productLink);
         productsPanel.firstElementChild.append(product);
+
+        if (count < 15) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+        count++;
     });
+    addPagination();
 }
 
 function deleteAllProduct() { //delete all products in productsPanel
@@ -307,3 +322,94 @@ searchBar.addEventListener('keyup', async (e) => {
         }
     }
 });
+
+
+
+
+//pagination
+
+const paginationPanel = document.querySelector('.pagination');
+
+function addPagination() {
+    deleteAllPagination();
+    for (let i = 1; i <= getNumPages(); i++) {
+        const pagination = document.createElement('li');
+        pagination.classList.add('pagination-item');
+        const paginationLink = document.createElement('a');
+        paginationLink.href = '#';
+        paginationLink.classList.add('pagination-item-link');
+        paginationLink.innerText = i;
+        if (i == 1) {
+            pagination.classList.add('pagination-item-active');
+        }
+        paginationLink.addEventListener('click', changePage);
+
+        pagination.append(paginationLink);
+        paginationPanel.insertBefore(pagination, paginationPanel.lastElementChild);
+    }
+};
+
+function deleteAllPagination() {
+    for (let i = 2; i < paginationPanel.childNodes.length - 2; i++) {
+        paginationPanel.removeChild(paginationPanel.childNodes[i]);
+        i--;
+    }
+}
+
+function getNumPages() {
+    return Math.floor(productsPanel.children[0].childElementCount / 15) + 1;
+}
+
+// function getCurrentPage() {
+//     return getCurrentPage;
+// }
+
+// function prevPage() {
+//     if (getCurrentPage > 1) {
+//         getCurrentPage--;
+//     }
+// }
+
+// function nextPage() {
+//     if (getCurrentPage < getCurrentPage()) {
+//         getCurrentPage++;
+//     }
+// }
+
+function changePage() {
+    removeClassFromAllPagination();
+    this.parentElement.classList.add('pagination-item-active');
+    if (oldPage <= this.innerText) {
+        for (let i = (oldPage - 1) * 15; i < (oldPage - 1) * 15 + 15; i++) {
+            if (productsPanel.children[0].children[i]) {
+                productsPanel.children[0].children[i].style.display = 'none';
+            }
+        }
+
+        for (let i = (this.innerText - 1) * 15; i < (this.innerText - 1) * 15 + 15; i++) {
+            if (productsPanel.children[0].children[i]) {
+                productsPanel.children[0].children[i].style.display = 'block';
+            }
+        }
+    } else {
+        for (let i = (this.innerText - 1) * 15; i < (this.innerText - 1) * 15 + 15; i++) {
+            if (productsPanel.children[0].children[i]) {
+                productsPanel.children[0].children[i].style.display = 'block';
+            }
+        }
+
+
+        for (let i = (oldPage - 1) * 15; i < (oldPage - 1) * 15 + 15; i++) {
+            if (productsPanel.children[0].children[i]) {
+                productsPanel.children[0].children[i].style.display = 'none';
+            }
+        }
+    }
+    oldPage = this.innerText;
+}
+
+function removeClassFromAllPagination() {
+    for (let i = 2; i < paginationPanel.childNodes.length - 2; i++) {
+        paginationPanel.childNodes[i].classList.remove('pagination-item-active')
+    }
+}
