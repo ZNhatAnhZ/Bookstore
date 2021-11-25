@@ -15,16 +15,32 @@ let headerCartNumber = document.querySelector('span.header__cart-number');
 headerCartNumber.innerText = 0;
 
 let headerCartList = document.querySelector('div.header__cart-list');
+// xem gio hang
 let cartFoot = document.createElement('div');
 cartFoot.classList.add('cart__foot');
 let cartItemBtn = document.createElement('button');
 cartItemBtn.classList.add('cart__item-btn');
 cartItemBtn.innerText = 'Xem giỏ hàng';
 cartFoot.append(cartItemBtn);
-cartItemBtn.addEventListener('click', async() => {
+cartItemBtn.addEventListener('click', async () => {
     const userResponse = await axios.get('/user');
     window.location = `/cart/${userResponse.data.user_id}`;
 });
+
+
+//hien thong bao mua
+const aleartx = document.querySelector('div.aleart-notify');
+const aleartSuccess = document.createElement('div');
+aleartSuccess.classList.add('aleart-success');
+aleartSuccess.innerHTML = `
+            <div class="aleart-success-icon">
+                <i class="fa fa-check-circle" aria-hidden="false"></i>
+            </div>
+            <div class="aleart-success-text">
+                Sản phẩm đã được thêm vào giỏ hàng
+            </div>
+            `;
+
 const buyNowButton = document.querySelector('.btn-buy-now');
 const addCommentButton = document.querySelector('.add-comment');
 const commentInput = document.querySelector('.form-control');
@@ -193,6 +209,11 @@ addCartButton.addEventListener('click', async () => {
     } else {
         window.location = `/login?origin=/products/${id}`;
     }
+    aleartx.append(aleartSuccess);
+
+    setTimeout(function () {
+        aleartx.removeChild(aleartSuccess);
+    }, 3000)
 })
 
 buyNowButton.addEventListener('click', async () => {
