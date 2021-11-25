@@ -34,7 +34,7 @@ async function findProduct(req, res) {
         const Products = await products.findAll({
             where: {
                 product_name: {
-                    [Op.like]: req.query.title
+                    [Op.substring]: req.query.title
                 }
             }
         });
