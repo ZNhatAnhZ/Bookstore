@@ -137,7 +137,7 @@ buyAllButton.addEventListener('click', async () => {
             const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
             const data = await axios.post(`/cart/${userResponse.data.user_id}`, { totalAmount: totalAmount });
 
-            location.reload();
+            deleteAllCartItems();
         }
     } catch (error) {
         console.log(error);
