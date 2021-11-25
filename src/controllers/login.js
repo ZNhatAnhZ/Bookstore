@@ -32,10 +32,12 @@ async function Login(req, res) {
                 res.redirect(returnTo);
             }
         } else {
-            res.send('wrong password');
+            let wrong = 'password';
+            res.send({ wrong });
         }
     } else {
-        res.send('wrong username');
+        let wrong = 'username';
+        res.send({ wrong });
     }
 }
 

@@ -35,7 +35,8 @@ async function Register(req, res) {
             res.redirect(returnTo);
         }
     } else {
-        res.send('already existed user');
+        let wrong = 'already existed user';
+        res.send({ wrong });
     }
 }
 
