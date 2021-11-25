@@ -14,7 +14,7 @@ let cartItemBtn = document.createElement('button');
 cartItemBtn.classList.add('cart__item-btn');
 cartItemBtn.innerText = 'Xem giỏ hàng';
 cartFoot.append(cartItemBtn);
-cartItemBtn.addEventListener('click', async() => {
+cartItemBtn.addEventListener('click', async () => {
     const userResponse = await axios.get('/user');
     window.location = `/cart/${userResponse.data.user_id}`;
 });
@@ -110,7 +110,7 @@ function addCategory(data) {
         link.innerText = e.category_name;
         link.addEventListener('click', async () => {
             for (let i = 0; i < categoriesPanel.childElementCount; i++) {
-                categoriesPanel.children[i].style.color = 'black';
+                categoriesPanel.children[i].firstElementChild.style.color = 'black';
             }
 
             link.style.color = 'rgb(238, 77, 45)';
@@ -137,7 +137,7 @@ function addCart(data) {
     data.forEach(async (e) => {
         countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
-        
+
         let li = document.createElement('li');
         li.classList.add('cart__item');
         let img = document.createElement('img');
