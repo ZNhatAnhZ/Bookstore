@@ -230,6 +230,11 @@ buyNowButton.addEventListener('click', async () => {
     } else {
         window.location = `/login?origin=/products/${id}`;
     }
+    aleartx.append(aleartSuccess);
+
+    setTimeout(function () {
+        aleartx.removeChild(aleartSuccess);
+    }, 3000)
 })
 
 addCommentButton.parentElement.addEventListener('submit', (e) => {

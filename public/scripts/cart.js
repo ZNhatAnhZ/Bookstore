@@ -4,6 +4,19 @@ const payAllPrice2 = document.querySelector('div.pay-all-price');
 const buyAllButton = document.querySelector('button.content-buy-btn');
 let totalAmount = 0;
 
+//thong bao da mua thanh cong
+const aleartx = document.querySelector('div.aleart-notify');
+const aleartSuccess = document.createElement('div');
+aleartSuccess.classList.add('aleart-success');
+aleartSuccess.innerHTML = `
+            <div class="aleart-success-icon">
+                <i class="fa fa-check-circle" aria-hidden="false"></i>
+            </div>
+            <div class="aleart-success-text">
+                Bạn đã mua hàng thành công !
+            </div>
+            `;
+
 function deleteAllCartItems() {
     for (let i = 0; i < mainCartPanel.childNodes.length; i++) {
         mainCartPanel.removeChild(mainCartPanel.childNodes[i]);
@@ -131,15 +144,24 @@ window.addEventListener('load', async () => {
 });
 
 buyAllButton.addEventListener('click', async () => {
+    aleartx.append(aleartSuccess);
+
+    setTimeout(function () {
+        aleartx.removeChild(aleartSuccess);
+    }, 3000)
     try {
         const userResponse = await axios.get('/user');
         if (userResponse.data.user_id) {
             const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
             const data = await axios.post(`/cart/${userResponse.data.user_id}`, { totalAmount: totalAmount });
 
-            location.reload();
+            // setTimeout(function () {
+            //     location.reload();
+            // }, 3000)  
+            deleteAllCartItems();
         }
     } catch (error) {
         console.log(error);
     }
+   
 })
