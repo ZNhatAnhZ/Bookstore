@@ -1,4 +1,5 @@
 const users = require('../models/users');
+const shop = require('../models/shop');
 const bcrypt = require('bcrypt');
 
 function renderRegister(req, res) {
@@ -23,6 +24,11 @@ async function Register(req, res) {
             user_name: username,
             user_type: 'user',
             password: hash
+        })
+        const newShop = await shop.create({
+            id: newUser.id,
+            shop_owner_id: newUser.id,
+            revenue: 0
         })
         req.session.user_id = newUser.dataValues.id;
         if (req.session.returnTo) {
