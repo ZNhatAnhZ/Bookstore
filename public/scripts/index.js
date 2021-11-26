@@ -7,6 +7,7 @@ const cartPanel = document.querySelector('ul.cart__list-item');
 let headerCartNumber = document.querySelector('span.header__cart-number');
 let oldPage = 1;
 const allPage = document.querySelector('.all-page-num');
+const currentPageNumber = document.querySelector('.current-page-num');
 
 
 //filtering
@@ -334,6 +335,7 @@ const paginationPanel = document.querySelector('.pagination');
 function addPagination() {
     deleteAllPagination();
     allPage.innerText = getNumPages();
+    currentPageNumber.innerText = 1;
     for (let i = 1; i <= getNumPages(); i++) {
         const pagination = document.createElement('li');
         pagination.classList.add('pagination-item');
@@ -381,6 +383,7 @@ function getNumPages() {
 function changePage() {
     removeClassFromAllPagination();
     this.parentElement.classList.add('pagination-item-active');
+    currentPageNumber.innerText = this.innerText;
     if (oldPage <= this.innerText) {
         for (let i = (oldPage - 1) * 15; i < (oldPage - 1) * 15 + 15; i++) {
             if (productsPanel.children[0].children[i]) {
