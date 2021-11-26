@@ -305,7 +305,7 @@
 
 .user-rating-book{
     margin-top: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
     padding-left: 14px;
     background-color: var(--white-color);
 }

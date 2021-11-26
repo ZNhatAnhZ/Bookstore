@@ -40,6 +40,16 @@ aleartSuccess.innerHTML = `
                 Sản phẩm đã được thêm vào giỏ hàng
             </div>
             `;
+const buySuccess = document.createElement('div');
+buySuccess.classList.add('aleart-success');
+buySuccess.innerHTML = `
+            <div class="aleart-success-icon">
+                 <i class="fa fa-check-circle" aria-hidden="false"></i>
+            </div>
+                <div class="aleart-success-text">
+                    Bạn đã mua sản phẩm thành công
+                </div>
+            `;
 
 const buyNowButton = document.querySelector('.btn-buy-now');
 const addCommentButton = document.querySelector('.add-comment');
@@ -230,10 +240,11 @@ buyNowButton.addEventListener('click', async () => {
     } else {
         window.location = `/login?origin=/products/${id}`;
     }
-    aleartx.append(aleartSuccess);
+
+    aleartx.append(buySuccess);
 
     setTimeout(function () {
-        aleartx.removeChild(aleartSuccess);
+        aleartx.removeChild(buySuccess);
     }, 3000)
 })
 
