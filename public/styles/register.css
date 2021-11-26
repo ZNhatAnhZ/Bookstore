@@ -168,7 +168,7 @@
     border-radius: 3px;
     font-size: 1.4rem;
     color: var(--white-color);
-    cursor: not-allowed;
+    cursor: pointer;
     margin-left: 10px;
 }
 
