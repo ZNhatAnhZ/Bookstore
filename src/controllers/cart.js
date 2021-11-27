@@ -16,8 +16,8 @@ function getCurrentDate() {
 }
 
 function getShippingDate() {
-    let today = new Date();
-    let dd = String(today.getDate() + 5).padStart(2, '0');
+    let today = new Date(Date.now() + 5 * 86400000);
+    let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
 
@@ -26,6 +26,7 @@ function getShippingDate() {
 }
 
 async function createOrder(id, totalAmount) {
+    console.log(getShippingDate());
     const allCartOfAnUser = await cart_items.findAll({ //find all cart items of an user
         where: {
             user_id: id
@@ -34,7 +35,7 @@ async function createOrder(id, totalAmount) {
 
     const newOrder = await orders.create({ // create an order
         order_by: id,
-        total_amount: totalAmount,
+        total_amount: totalAmount + 30000,
         status: 'complete',
         created_at: getCurrentDate()
     });
@@ -42,7 +43,7 @@ async function createOrder(id, totalAmount) {
     const newPayment = await payments.create({ // create a payment
         payment_type: 'Tiền mặt',
         order_id: newOrder.id,
-        amount: totalAmount,
+        amount: totalAmount + 30000,
         status: 'pending',
         created_at: newOrder.created_at
     });
