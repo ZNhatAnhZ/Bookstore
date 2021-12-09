@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const { spawn } = require('child_process');
 
 const usersModel = require('./src/models/users');
 
@@ -55,4 +56,10 @@ app.use('/register', register);
 app.use('/logout', logout);
 app.use('/personalshop', personalshop);
 app.use('/cart', cart);
+
+
+
+
+
+
 

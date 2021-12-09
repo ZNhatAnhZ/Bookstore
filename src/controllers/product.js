@@ -9,6 +9,7 @@ const product_review = require('../models/product_review');
 const category = require('../models/category');
 const { Op } = require("sequelize");
 
+
 function getCurrentDate() {
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -217,6 +218,45 @@ async function getAllProductbyCondition(req, res) {
 
 }
 
+async function getRecommendedProduct(req, res) {
+    const { id } = req.params;
+    let allRatingArray = [];
+
+    const allRating = await product_review.findAll({
+        attributes: ['review_by', 'review_product_id', 'rating']
+    })
+
+    allRating.forEach((element) => {
+        let tempArray = [];
+        tempArray.push(element.dataValues.review_by, element.dataValues.review_product_id, element.dataValues.rating);
+        allRatingArray.push(tempArray);
+    })
+
+    for (let i = 0; i < allRatingArray.length; i++) {
+        let count = 1;
+        let sum = allRatingArray[i][2];
+        for (let j = i + 1; j < allRatingArray.length; j++) {
+            if (allRatingArray[i][0] === allRatingArray[j][0] && allRatingArray[i][1] === allRatingArray[j][1]) {
+                sum = sum + allRatingArray[j][2];
+                count++;
+                allRatingArray.splice(j, 1);
+                j--;
+            }
+        }
+        allRatingArray[i][2] = sum / count;
+    }
+
+    const spawn = require('child_process').spawn;
+    const pythonProcess = spawn('C:/Users/NhatAnh/AppData/Local/Programs/Python/Python39/python.exe', ['C:/Users/NhatAnh/Desktop/ProjectWeb2/src/controllers/recommender.py', JSON.stringify(allRatingArray), id]);
+    pythonProcess.stdout.on('data', (data) => {
+        console.log(data.toString());
+        res.send(data);
+    });
+    pythonProcess.on('error', (err) => {
+        console.log(err)
+    });
+}
+
 module.exports = {
     findProduct,
     renderProduct,
@@ -224,7 +264,8 @@ module.exports = {
     buyProduct,
     addComment,
     loadComment,
-    getAllProductbyCondition
+    getAllProductbyCondition,
+    getRecommendedProduct
 }
 
 
