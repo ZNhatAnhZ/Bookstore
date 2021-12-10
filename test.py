@@ -60,7 +60,10 @@ class CF(object):
         users_rated_i = (self.Y_data[ids, 0]).astype(np.int32)
         # Step 3: find similarity btw the current user and others
         # who already rated i
-        sim = self.S[u, users_rated_i]
+        if u >= len(self.S):
+            return np.NaN
+        else:
+            sim = self.S[u, users_rated_i]
         # Step 4: find the k most similarity users
         a = np.argsort(sim)[-self.k :]
         # and the corresponding similarity levels
@@ -134,6 +137,6 @@ sample = [
 Y_data = np.array(sample)
 rs = CF(Y_data, k=2, uuCF=1)
 rs.fit()
-print(rs.recommend(6))
+print(rs.recommend(7))
 
 print("--- %s seconds ---" % (time.time() - start_time))

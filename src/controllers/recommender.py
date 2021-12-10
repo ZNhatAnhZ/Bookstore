@@ -52,9 +52,12 @@ class Recommendation_System(object):
             np.int32
         )  # get rated users
 
-        rated_user_similarity = self.similar_user[
-            user, all_users_rated_this_item
-        ]  # get users similarity to this user
+        if user >= len(self.similar_user):
+            return np.NaN
+        else:
+            rated_user_similarity = self.similar_user[
+                user, all_users_rated_this_item
+            ]  # get users similarity to this user
 
         index_of_nearest_limited_rated_user = np.argsort(rated_user_similarity)[
             -self.userLimit :
@@ -118,7 +121,7 @@ try:
     # print(arrayOfReviews)
     # sys.stdout.flush()
 except Exception as e:
-    print(traceback.format_exc())
+    # print(traceback.format_exc())
     sys.stdout.flush()
 
 
