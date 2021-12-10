@@ -57,6 +57,37 @@ app.use('/logout', logout);
 app.use('/personalshop', personalshop);
 app.use('/cart', cart);
 
+// function randomIntFromInterval(min, max) { // min and max included 
+//     return Math.floor(Math.random() * (max - min + 1) + min)
+// };
+
+// const product_review = require('./src/models/product_review');
+
+// async function add() {
+//     for (let i = 0; i < 10; i++) {
+//         const review_by = 31;
+//         const review_product_id = randomIntFromInterval(0, 110);
+//         const rating = randomIntFromInterval(0, 5);
+//         let comment = "";
+//         if (rating >= 4) {
+//             comment = 'đây là 1 cuốn sách hay';
+//         } else if (rating === 3) {
+//             comment = 'sách bình thường';
+//         } else {
+//             comment = 'sách không hay';
+//         }
+//         const new_product_review = await product_review.create({
+//             review_product_id: review_product_id,
+//             review_by: review_by,
+//             rating: rating,
+//             comment: comment,
+//             review_date: '2021-11-24'
+//         });
+//     }
+// }
+
+// add();
+
 
 
 

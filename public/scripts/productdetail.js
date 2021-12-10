@@ -158,10 +158,6 @@ window.addEventListener('load', async () => {
         const category = await axios.get(`/categories?id=${product.data.product_category}`);
         const userResponse = await axios.get('/user');
         const commentResponse = await axios.get(`/products/comment/${id}`);
-        if (userResponse.data.user_id) {
-            const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
-            addCart(cartResponse.data);
-        }
 
         let productPhoto = document.createElement('div');
         let productSupplier = document.createElement('span');
@@ -186,8 +182,16 @@ window.addEventListener('load', async () => {
             productInfoContainer[2].innerText += e.category_name;
         })
         productInfoDescription.innerText = product.data.product_details;
-        loadComment(commentResponse.data);
 
+        if (userResponse.data.user_id) {
+            const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
+            const getRecommendedProduct = await axios.get(`/products/recommendedproducts/${userResponse.data.user_id}`);
+            addCart(cartResponse.data);
+            console.log(getRecommendedProduct.data);
+            addRecommendedProducts(getRecommendedProduct.data);
+        }
+
+        loadComment(commentResponse.data);
     } catch (error) {
         console.log(error);
     }
@@ -270,3 +274,77 @@ addCommentButton.addEventListener('click', async () => {
 })
 
 logo.firstElementChild.setAttribute('href', '/');
+
+
+function addRecommendedProducts(data) {
+    const recommendedProductsPanel = document.querySelector('div.grid__row.gird__row-limit');
+    data.forEach((element) => {
+        let product = document.createElement('div');
+        product.classList.add('grid-column-2');
+        let productLink = document.createElement('a');
+        productLink.classList.add('home-product-item');
+        let img = document.createElement('div');
+        img.classList.add('product-item-img');
+        let productTitle = document.createElement('h4');
+        productTitle.classList.add('product-item-name');
+        //price
+        let productPrice = document.createElement('div');
+        productPrice.classList.add('product-item-price');
+        let productPriceText = document.createElement('span');
+        let productOldPrice = document.createElement('span');
+        //rating
+        let productItemRating = document.createElement('div');
+        let productRatingHeart = document.createElement('span');
+        productRatingHeart.classList.add('rating-heart');
+        let itemHeart = document.createElement('i');
+        itemHeart.classList.add('fa');
+        itemHeart.classList.add('fa-heart-o');
+        let productRatingStar = document.createElement('span');
+        productRatingStar.classList.add('rating-star');
+        let itemStar = document.createElement('i');
+        itemStar.classList.add('fa');
+        itemStar.classList.add('fa-star');
+        let itemStar1 = document.createElement('i');
+        itemStar1.classList.add('fa');
+        itemStar1.classList.add('fa-star');
+        let itemStar2 = document.createElement('i');
+        itemStar2.classList.add('fa');
+        itemStar2.classList.add('fa-star');
+        let itemStar3 = document.createElement('i');
+        itemStar3.classList.add('fa');
+        itemStar3.classList.add('fa-star');
+        let itemStar4 = document.createElement('i');
+        itemStar4.classList.add('fa');
+        itemStar4.classList.add('fa-star');
+        let itemStar5 = document.createElement('i');
+        itemStar5.classList.add('fa');
+        itemStar5.classList.add('fa-star-o');
+        let productNumberSold = document.createElement('span');
+        productNumberSold.classList.add('rating-number-sold');
+        productNumberSold.innerText = 'Số lượng ' + element.quantity;
+        //yeu thich
+        let productItemFavourite = document.createElement('div');
+        productItemFavourite.classList.add('product-item-favourite');
+        let itemCheck = document.createElement('i');
+        itemCheck.classList.add('fa');
+        itemCheck.classList.add('fa-check');
+        productItemFavourite.append(itemCheck, 'Yêu thích');
+
+        productItemRating.classList.add('product-item-rating');
+        productOldPrice.classList.add('product-item-price-old');
+        productPriceText.classList.add('product-item-price-current');
+        productLink.setAttribute('href', `/products/${element.id}`);
+        img.style.backgroundImage = `url(${element.product_photo})`;
+        productTitle.innerText = element.product_name;
+        productPriceText.innerText = element.product_price + 'đ';
+        productOldPrice.innerText = element.product_price * 1.5 + 'đ';
+
+        productRatingStar.append(itemStar, itemStar1, itemStar2, itemStar3, itemStar4);
+        productRatingHeart.append(itemHeart);
+        productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
+        productPrice.append(productOldPrice, productPriceText);
+        productLink.append(img, productTitle, productPrice, productItemRating, productItemFavourite);
+        product.append(productLink);
+        recommendedProductsPanel.append(product);
+    })
+}

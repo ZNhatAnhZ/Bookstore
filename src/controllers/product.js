@@ -30,6 +30,22 @@ function getShippingDate() {
     return today;
 }
 
+function convertStringToArray(string) {
+    let arrayOfData = [];
+    let stringNumber = '';
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] >= '0' && string[i] <= '9') {
+            stringNumber += string[i];
+        } else {
+            if (!isNaN(parseInt(stringNumber))) {
+                arrayOfData.push(parseInt(stringNumber));
+            }
+            stringNumber = '';
+        }
+    }
+    return arrayOfData;
+}
+
 async function findProduct(req, res) {
     if (req.query['title'] != null) {
         const Products = await products.findAll({
@@ -248,9 +264,16 @@ async function getRecommendedProduct(req, res) {
 
     const spawn = require('child_process').spawn;
     const pythonProcess = spawn('C:/Users/NhatAnh/AppData/Local/Programs/Python/Python39/python.exe', ['C:/Users/NhatAnh/Desktop/ProjectWeb2/src/controllers/recommender.py', JSON.stringify(allRatingArray), id]);
-    pythonProcess.stdout.on('data', (data) => {
-        console.log(data.toString());
-        res.send(data);
+    pythonProcess.stdout.on('data', async (data) => {
+        let recommendedProductsData = [];
+        const stringOfData = data.toString(); //convert the data from byte to string
+        const recommendedProductsId = convertStringToArray(stringOfData); // convert string to array for accessing product id
+        await Promise.all(recommendedProductsId.map(async (e) => {
+            const Product = await products.findByPk(e);
+            recommendedProductsData.push(Product);
+        }))
+        console.log(stringOfData);
+        res.send(recommendedProductsData);
     });
     pythonProcess.on('error', (err) => {
         console.log(err)

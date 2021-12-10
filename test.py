@@ -134,6 +134,6 @@ sample = [
 Y_data = np.array(sample)
 rs = CF(Y_data, k=2, uuCF=1)
 rs.fit()
-rs.print_recommendation()
+print(rs.recommend(6))
 
 print("--- %s seconds ---" % (time.time() - start_time))

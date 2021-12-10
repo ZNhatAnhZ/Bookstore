@@ -34,7 +34,7 @@ class Recommendation_System(object):
                 self.normalized_data[:, 2],
                 (self.normalized_data[:, 1], self.normalized_data[:, 0]),
             ),
-            (max(items) + 1, max(users) + 1),
+            (int(np.max(items)) + 1, int(np.max(users)) + 1),
         )
         self.normalized_matrix = self.normalized_matrix.tocsr()
 
@@ -81,7 +81,7 @@ class Recommendation_System(object):
     def recommend(self, user):
         self.generate_prerequisite()
 
-        recommended_items = []
+        recommended_items_dict = {}
         ids = np.where(self.data[:, 0] == user)[0]
         items_rated_by_this_user = self.data[ids, 1].astype(np.int32)
         all_items = np.unique(self.data[:, 1].astype(np.int32))
@@ -90,15 +90,25 @@ class Recommendation_System(object):
             if item not in items_rated_by_this_user:
                 rating = self.predict(user, item)
                 if rating > 0:
-                    recommended_items.append(item)
+                    recommended_items_dict[item] = rating
+        recommended_items_dict = sorted(
+            recommended_items_dict.items(), key=lambda x: x[1], reverse=True
+        )
+        recommended_item = []
+        if len(recommended_items_dict) > 6:
+            for i in range(6):
+                recommended_item.append(list(recommended_items_dict)[i][0])
+        else:
+            for i in range(len(recommended_items_dict)):
+                recommended_item.append(list(recommended_items_dict)[i][0])
 
-        return recommended_items
+        return recommended_item
 
 
 try:
     jsondata = json.loads(sys.argv[1])
     arrayOfReviews = np.asarray(jsondata, dtype=np.float)
-    rs = Recommendation_System(arrayOfReviews, 3)
+    rs = Recommendation_System(arrayOfReviews, 4)
     data = rs.recommend(int(sys.argv[2]))
     print(data)
     sys.stdout.flush()
@@ -137,7 +147,7 @@ except Exception as e:
 #     [6, 4, 5.0],
 # ]
 # rs = Recommendation_System(np.array(sample), 3)
-# print(rs.recommend(5))
+# print(rs.recommend(7))
 
 # sample1 = [
 #     [8.0, 2.0, 5.0],
@@ -147,4 +157,4 @@ except Exception as e:
 # ]
 
 # rs = Recommendation_System(np.array(sample1), 2)
-# print(rs.recommend(23))
+# print(rs.recommend(26))
