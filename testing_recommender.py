@@ -6,6 +6,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy import sparse
 import sys, json
 import traceback
+import time
+
+start_time = time.time()
 
 
 class Recommendation_System(object):
@@ -45,6 +48,8 @@ class Recommendation_System(object):
         )
 
     def predict(self, user, item):
+        print("################################################################")
+        print("PREDICT FOR ITEM: ", item)
         index_user_rated_this_item = np.where(self.data[:, 1] == item)[
             0
         ]  # get rated user index to find users
@@ -52,6 +57,7 @@ class Recommendation_System(object):
         all_users_rated_this_item = (self.data[index_user_rated_this_item, 0]).astype(
             np.int32
         )  # get rated users
+        print("All USER RATED THIS ITEM: ", all_users_rated_this_item)
 
         if user >= len(self.similar_user):
             return np.NaN
@@ -60,23 +66,36 @@ class Recommendation_System(object):
                 user, all_users_rated_this_item
             ]  # get users similarity to this user
 
+        print("USERS SIMILARITY TO USER", user, ":", rated_user_similarity)
+
         index_of_nearest_limited_rated_user = np.argsort(rated_user_similarity)[
             -self.userLimit :
         ].astype(
             np.int32
         )  # get index of users which have the highest similarity
 
+        print(
+            "INDEX OF THE USERS ORDERED BY SIMILARITY VALUE: ",
+            index_of_nearest_limited_rated_user,
+        )
+
         rating_of_nearest_user = self.normalized_matrix[
             item, all_users_rated_this_item[index_of_nearest_limited_rated_user]
         ]  # get rating of those nearest users
 
+        print("RATING OF THOSE NEAREST USERS: ")
+        print(rating_of_nearest_user)
+
         all_nearest_user_similarity = rated_user_similarity[
             index_of_nearest_limited_rated_user
-        ]
+        ]  # get similarity value of those nearest users
 
-        return (rating_of_nearest_user * all_nearest_user_similarity)[0] / (
+        result = (rating_of_nearest_user * all_nearest_user_similarity)[0] / (
             np.abs(all_nearest_user_similarity).sum() + 1e-8
         )
+
+        print("PREDICTED RATING OF USER", user, "FOR ITEM", item, ": ", result)
+        return result
 
     def generate_prerequisite(self):
         self.normalize_data()
@@ -98,6 +117,21 @@ class Recommendation_System(object):
         recommended_items_dict = sorted(
             recommended_items_dict.items(), key=lambda x: x[1], reverse=True
         )
+        print("###############################################################")
+        print("NORMALIZED MATRIX: ")
+        print(self.normalized_matrix)
+        print("\n")
+
+        print("USER SIMILARITY MATRIX: ")
+        print(DataFrame(self.similar_user))
+        print("\n")
+
+        print("###############################################################")
+        print("ALL SHOULD BE RECOMMENDED FOR USER", user, ": ")
+        print(
+            DataFrame(recommended_items_dict, columns=["item_id", "predicted_rating"])
+        )
+
         recommended_item = []
         if len(recommended_items_dict) > 6:
             for i in range(6):
@@ -109,56 +143,59 @@ class Recommendation_System(object):
         return recommended_item
 
 
+# connect to mysql server
+import mysql.connector
+
 try:
-    jsondata = json.loads(sys.argv[1])
-    arrayOfReviews = np.asarray(jsondata, dtype=np.float)
-    rs = Recommendation_System(arrayOfReviews, 4)
-    data = rs.recommend(int(sys.argv[2]))
-    print(data)
-    sys.stdout.flush()
+    connection = mysql.connector.connect(
+        host="localhost",
+        port=3307,
+        database="e-commerce",
+        user="root",
+        password="123456789",
+    )
 
-    # jsondata = json.loads(sys.argv[1])
-    # arrayOfReviews = np.asarray(jsondata, dtype=np.float)
-    # print(arrayOfReviews)
-    # sys.stdout.flush()
-except Exception as e:
-    # print(traceback.format_exc())
-    sys.stdout.flush()
+    sql_select_Query = "select * from product_reviews"
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    # get all records
+    product_reviews = cursor.fetchall()
+
+    arrayOfRating = []
+    for row in product_reviews:
+        temp = []
+        temp.append(row[2])
+        temp.append(row[1])
+        temp.append(row[3])
+        arrayOfRating.append(temp)
+
+    i = 0
+    while i < len(arrayOfRating):
+        count = 1
+        sumOfRating = arrayOfRating[i][2]
+        j = i + 1
+        while j < len(arrayOfRating):
+            if (
+                arrayOfRating[i][0] == arrayOfRating[j][0]
+                and arrayOfRating[i][1] == arrayOfRating[j][1]
+            ):
+                sumOfRating = sumOfRating + arrayOfRating[j][2]
+                count = count + 1
+                arrayOfRating.pop(j)
+                j = j - 1
+            j = j + 1
+        arrayOfRating[i][2] = sumOfRating / count
+        i = i + 1
+
+except mysql.connector.Error as e:
+    print("Error reading data from MySQL table", e)
+finally:
+    if connection.is_connected():
+        connection.close()
+        cursor.close()
 
 
-# sample = [
-#     [0, 0, 5.0],
-#     [0, 1, 4.0],
-#     [0, 3, 2.0],
-#     [0, 4, 2.0],
-#     [1, 0, 5.0],
-#     [1, 2, 4.0],
-#     [1, 3, 2.0],
-#     [1, 4, 0.0],
-#     [2, 0, 2.0],
-#     [2, 2, 1.0],
-#     [2, 3, 3.0],
-#     [2, 4, 4.0],
-#     [3, 0, 0.0],
-#     [3, 1, 0.0],
-#     [3, 3, 4.0],
-#     [4, 0, 1.0],
-#     [4, 3, 4.0],
-#     [5, 1, 2.0],
-#     [5, 2, 1.0],
-#     [6, 2, 1.0],
-#     [6, 3, 4.0],
-#     [6, 4, 5.0],
-# ]
-# rs = Recommendation_System(np.array(sample), 3)
-# print(rs.recommend(7))
+rs = Recommendation_System(np.array(arrayOfRating), 3)
+print("CHOOSEN PRODUCT TO RECOMMEND FOR THIS USER:", rs.recommend(4))
 
-# sample1 = [
-#     [8.0, 2.0, 5.0],
-#     [22.0, 1.0, 5.0],
-#     [23.0, 3.0, 5.0],
-#     [24.0, 0.0, 5.0],
-# ]
-
-# rs = Recommendation_System(np.array(sample1), 2)
-# print(rs.recommend(26))
+print("--- %s seconds ---" % (time.time() - start_time))
