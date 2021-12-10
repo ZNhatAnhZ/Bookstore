@@ -355,7 +355,7 @@
     border-radius: 3px;
     padding: 10px 0px;
     height: 100%;
-    margin: 20px 0;
+    margin: 20px 20px 20px 0px;
     font-size: 1.8rem;
     color: #ee4d2d;
     cursor: pointer;
@@ -400,4 +400,13 @@
 
 .btn-see-more:hover{
     background-color: rgba(230, 94, 49, 0.05);
+}
+
+
+#rating-selecter {
+    font-size: 1.6rem;
+}
+
+#label-rating-selecter {
+    font-size: 1.6rem;
 }

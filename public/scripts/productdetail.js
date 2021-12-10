@@ -12,6 +12,7 @@ const subQtyButton = document.querySelector('.btn-subtract-qty');
 const Qty = document.querySelector('.qty');
 const addCartButton = document.querySelector('.btn-cart-to-cart');
 let headerCartNumber = document.querySelector('span.header__cart-number');
+const ratingSelecter = document.querySelector('#rating-selecter');
 headerCartNumber.innerText = 0;
 
 let headerCartList = document.querySelector('div.header__cart-list');
@@ -94,10 +95,28 @@ function loadComment(data) {
         commentDiv.style.width = '50%';
         let commentDate = document.createElement('h6');
         commentDate.innerText = e.review_date;
+        commentDate.style.display = 'inline';
+        commentDate.style.marginRight = '10px';
         let comment = document.createElement('p');
         comment.innerText = e.comment;
+        let commentRating = document.createElement('span');
+        commentRating.classList.add('rating-star');
+        for (let i = 0; i < e.rating; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            commentRating.append(ratingStar);
+        }
+        for (let i = 0; i < 5 - e.rating; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star-o');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            commentRating.append(ratingStar);
+        }
 
-        commentDiv.append(commentDate, comment);
+        commentDiv.append(commentDate, commentRating, comment);
         let linebreak = document.createElement('br');
 
         Div.append(userDiv, commentDiv, linebreak);
@@ -262,7 +281,8 @@ addCommentButton.addEventListener('click', async () => {
     if (userResponse.data.user_id) {
         try {
             const data = await axios.post(`/products/comment/${id}`, {
-                comment: commentInput.value
+                comment: commentInput.value,
+                rating: ratingSelecter.value
             });
         } catch (error) {
             console.log(error);

@@ -176,12 +176,12 @@ async function buyProduct(req, res) {
 
 async function addComment(req, res) {
     let { id } = req.params;
-    const { comment } = req.body;
+    const { comment, rating } = req.body;
     if (req.session.user_id != null) {
         const newComment = product_review.create({
             review_product_id: id,
             review_by: req.session.user_id,
-            rating: 5,
+            rating: rating,
             comment: comment,
             review_date: getCurrentDate()
         });
