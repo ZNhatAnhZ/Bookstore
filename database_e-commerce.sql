@@ -34,7 +34,7 @@ CREATE TABLE `cart_items` (
   KEY `product_id_product` (`product_id`),
   CONSTRAINT `product_id_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `user_id_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `cart_items` (
 
 LOCK TABLES `cart_items` WRITE;
 /*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
-INSERT INTO `cart_items` VALUES (6,16,0,2),(8,16,0,4),(9,16,1,3),(10,16,3,1);
+INSERT INTO `cart_items` VALUES (6,16,0,2),(8,16,0,4),(9,16,1,3),(10,16,3,1),(48,24,0,3),(49,24,3,2);
 /*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `order_items` (
   KEY `product_id_cart_idx` (`product_id`),
   CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `product_id_cart` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (2,3,0,'2021-11-24'),(3,7,2,'2021-11-24'),(4,7,0,'2021-11-24'),(5,8,6,'2021-11-24'),(6,8,8,'2021-11-24'),(7,8,13,'2021-11-24'),(8,9,11,'2021-11-24'),(9,9,5,'2021-11-24'),(10,10,24,'2021-11-24'),(11,11,4,'2021-11-24'),(12,11,2,'2021-11-24'),(13,12,1,'2021-11-24'),(14,13,2,'2021-11-24'),(15,14,1,'2021-11-24'),(16,15,0,'2021-11-25'),(17,15,3,'2021-11-25'),(18,16,2,'2021-11-25');
+INSERT INTO `order_items` VALUES (2,3,0,'2021-11-24'),(3,7,2,'2021-11-24'),(4,7,0,'2021-11-24'),(5,8,6,'2021-11-24'),(6,8,8,'2021-11-24'),(7,8,13,'2021-11-24'),(8,9,11,'2021-11-24'),(9,9,5,'2021-11-24'),(10,10,24,'2021-11-24'),(11,11,4,'2021-11-24'),(12,11,2,'2021-11-24'),(13,12,1,'2021-11-24'),(14,13,2,'2021-11-24'),(15,14,1,'2021-11-24'),(16,15,0,'2021-11-25'),(17,15,3,'2021-11-25'),(18,16,2,'2021-11-25'),(19,17,41,'2021-11-26'),(20,18,3,'2021-11-26'),(21,19,32,'2021-11-26'),(22,20,4,'2021-11-26'),(23,20,2,'2021-11-26'),(24,26,3,'2021-11-27'),(25,26,1,'2021-11-27');
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `order_by_users_idx` (`order_by`),
   CONSTRAINT `order_by_users` FOREIGN KEY (`order_by`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,8,0,'complete','2021-11-24'),(2,8,0,'complete','2021-11-24'),(3,8,0,'complete','2021-11-24'),(4,8,0,'complete','2021-11-24'),(5,8,0,'complete','2021-11-24'),(6,8,0,'complete','2021-11-24'),(7,8,0,'complete','2021-11-24'),(8,8,0,'complete','2021-11-24'),(9,8,0,'complete','2021-11-24'),(10,8,0,'complete','2021-11-24'),(11,8,594000,'complete','2021-11-24'),(12,8,40000,'complete','2021-11-24'),(13,8,1000000,'complete','2021-11-24'),(14,8,40000,'complete','2021-11-24'),(15,8,236000,'complete','2021-11-25'),(16,8,250000,'complete','2021-11-25');
+INSERT INTO `orders` VALUES (1,8,0,'complete','2021-11-24'),(2,8,0,'complete','2021-11-24'),(3,8,0,'complete','2021-11-24'),(4,8,0,'complete','2021-11-24'),(5,8,0,'complete','2021-11-24'),(6,8,0,'complete','2021-11-24'),(7,8,0,'complete','2021-11-24'),(8,8,0,'complete','2021-11-24'),(9,8,0,'complete','2021-11-24'),(10,8,0,'complete','2021-11-24'),(11,8,594000,'complete','2021-11-24'),(12,8,40000,'complete','2021-11-24'),(13,8,1000000,'complete','2021-11-24'),(14,8,40000,'complete','2021-11-24'),(15,8,236000,'complete','2021-11-25'),(16,8,250000,'complete','2021-11-25'),(17,22,270000,'complete','2021-11-26'),(18,22,82000,'complete','2021-11-26'),(19,23,222000,'complete','2021-11-26'),(20,23,624000,'complete','2021-11-26'),(21,24,374000,'complete','2021-11-27'),(22,24,374000,'complete','2021-11-27'),(23,8,122000,'complete','2021-11-27'),(24,8,122000,'complete','2021-11-27'),(25,8,122000,'complete','2021-11-27'),(26,8,122000,'complete','2021-11-27');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `payments` (
   PRIMARY KEY (`id`),
   KEY `order_id_idx` (`order_id`),
   CONSTRAINT `order_id_payments` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +156,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,'Tiền mặt',1,320000,'pending','2021-11-24'),(2,'Tiền mặt',2,264000,'pending','2021-11-24'),(3,'Tiền mặt',3,660000,'pending','2021-11-24'),(4,'Tiền mặt',4,80000,'pending','2021-11-24'),(5,'Tiền mặt',5,80000,'pending','2021-11-24'),(6,'Tiền mặt',6,80000,'pending','2021-11-24'),(7,'Tiền mặt',7,580000,'pending','2021-11-24'),(8,'Tiền mặt',8,218000,'pending','2021-11-24'),(9,'Tiền mặt',9,0,'pending','2021-11-24'),(10,'Tiền mặt',10,0,'pending','2021-11-24'),(11,'Tiền mặt',11,594000,'pending','2021-11-24'),(12,'Tiền mặt',12,40000,'pending','2021-11-24'),(13,'Tiền mặt',13,1000000,'pending','2021-11-24'),(14,'Tiền mặt',14,40000,'pending','2021-11-24'),(15,'Tiền mặt',15,236000,'pending','2021-11-25'),(16,'Tiền mặt',16,250000,'pending','2021-11-25');
+INSERT INTO `payments` VALUES (1,'Tiền mặt',1,320000,'pending','2021-11-24'),(2,'Tiền mặt',2,264000,'pending','2021-11-24'),(3,'Tiền mặt',3,660000,'pending','2021-11-24'),(4,'Tiền mặt',4,80000,'pending','2021-11-24'),(5,'Tiền mặt',5,80000,'pending','2021-11-24'),(6,'Tiền mặt',6,80000,'pending','2021-11-24'),(7,'Tiền mặt',7,580000,'pending','2021-11-24'),(8,'Tiền mặt',8,218000,'pending','2021-11-24'),(9,'Tiền mặt',9,0,'pending','2021-11-24'),(10,'Tiền mặt',10,0,'pending','2021-11-24'),(11,'Tiền mặt',11,594000,'pending','2021-11-24'),(12,'Tiền mặt',12,40000,'pending','2021-11-24'),(13,'Tiền mặt',13,1000000,'pending','2021-11-24'),(14,'Tiền mặt',14,40000,'pending','2021-11-24'),(15,'Tiền mặt',15,236000,'pending','2021-11-25'),(16,'Tiền mặt',16,250000,'pending','2021-11-25'),(17,'Tiền mặt',17,270000,'pending','2021-11-26'),(18,'Tiền mặt',18,82000,'pending','2021-11-26'),(19,'Tiền mặt',19,222000,'pending','2021-11-26'),(20,'Tiền mặt',20,624000,'pending','2021-11-26'),(21,'Tiền mặt',21,374000,'pending','2021-11-27'),(22,'Tiền mặt',22,374000,'pending','2021-11-27'),(23,'Tiền mặt',23,122000,'pending','2021-11-27'),(24,'Tiền mặt',24,122000,'pending','2021-11-27'),(25,'Tiền mặt',25,122000,'pending','2021-11-27'),(26,'Tiền mặt',26,122000,'pending','2021-11-27');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,9 +177,9 @@ CREATE TABLE `product_reviews` (
   PRIMARY KEY (`id`),
   KEY `user_id_review_idx` (`review_by`),
   KEY `product_id_review_idx` (`review_product_id`),
-  CONSTRAINT `product_id_review` FOREIGN KEY (`review_product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `product_id_review` FOREIGN KEY (`review_product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
   CONSTRAINT `user_id_review` FOREIGN KEY (`review_by`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `product_reviews` (
 
 LOCK TABLES `product_reviews` WRITE;
 /*!40000 ALTER TABLE `product_reviews` DISABLE KEYS */;
-INSERT INTO `product_reviews` VALUES (1,2,8,5,'aaaa','2021-11-24'),(2,2,8,5,'aaaa','2021-11-24'),(3,2,8,5,'đây là thử','2021-11-24');
+INSERT INTO `product_reviews` VALUES (1,2,8,5,'aaaa','2021-11-24'),(2,2,8,5,'aaaa','2021-11-24'),(3,2,8,5,'đây là thử','2021-11-24'),(4,1,22,5,'Đây là 1 quyển sách hay','2021-11-26'),(5,3,23,5,'đây là cuốn sách hay','2021-11-26'),(6,0,24,5,'sách hay','2021-11-27'),(7,21,23,5,'đây là 1 cuốn sách hay','2021-11-24'),(8,46,23,1,'sách không hay','2021-11-24'),(9,72,11,2,'sách không hay','2021-11-24'),(10,82,24,5,'đây là 1 cuốn sách hay','2021-11-24'),(11,43,24,0,'sách không hay','2021-11-24'),(12,99,24,0,'sách không hay','2021-11-24'),(13,106,2,1,'sách không hay','2021-11-24'),(15,91,8,2,'sách không hay','2021-11-24'),(16,11,6,1,'sách không hay','2021-11-24'),(17,57,13,0,'sách không hay','2021-11-24'),(18,50,4,1,'sách không hay','2021-11-24'),(19,91,1,3,'sách bình thường','2021-11-24'),(20,22,18,5,'đây là 1 cuốn sách hay','2021-11-24'),(21,95,6,3,'sách bình thường','2021-11-24'),(22,55,19,0,'sách không hay','2021-11-24'),(23,67,21,3,'sách bình thường','2021-11-24'),(24,37,11,5,'đây là 1 cuốn sách hay','2021-11-24'),(25,0,13,4,'đây là 1 cuốn sách hay','2021-11-24'),(26,69,20,1,'sách không hay','2021-11-24'),(27,50,3,2,'sách không hay','2021-11-24'),(28,106,12,4,'đây là 1 cuốn sách hay','2021-11-24'),(29,39,11,4,'đây là 1 cuốn sách hay','2021-11-24'),(30,36,8,2,'sách không hay','2021-11-24'),(31,93,24,1,'sách không hay','2021-11-24'),(32,54,19,5,'đây là 1 cuốn sách hay','2021-11-24'),(33,84,6,3,'sách bình thường','2021-11-24'),(34,14,11,3,'sách bình thường','2021-11-24'),(35,38,12,0,'sách không hay','2021-11-24'),(36,2,7,0,'sách không hay','2021-11-24'),(37,57,6,2,'sách không hay','2021-11-24'),(38,106,12,4,'đây là 1 cuốn sách hay','2021-11-24'),(39,53,4,4,'đây là 1 cuốn sách hay','2021-11-24'),(40,94,6,4,'đây là 1 cuốn sách hay','2021-11-24'),(41,59,12,1,'sách không hay','2021-11-24'),(42,61,4,2,'sách không hay','2021-11-24'),(43,105,23,3,'sách bình thường','2021-11-24'),(44,110,14,1,'sách không hay','2021-11-24'),(45,75,11,4,'đây là 1 cuốn sách hay','2021-11-24'),(46,102,20,0,'sách không hay','2021-11-24'),(47,91,0,0,'sách không hay','2021-11-24'),(48,6,9,4,'đây là 1 cuốn sách hay','2021-11-24'),(49,90,22,4,'đây là 1 cuốn sách hay','2021-11-24'),(50,103,7,3,'sách bình thường','2021-11-24'),(51,90,0,2,'sách không hay','2021-11-24'),(52,94,19,3,'sách bình thường','2021-11-24'),(53,7,11,2,'sách không hay','2021-11-24'),(54,54,13,5,'đây là 1 cuốn sách hay','2021-11-24'),(55,19,5,3,'sách bình thường','2021-11-24'),(56,45,19,3,'sách bình thường','2021-11-24'),(57,57,15,5,'đây là 1 cuốn sách hay','2021-11-24'),(58,53,21,1,'sách không hay','2021-11-24'),(59,15,4,5,'đây là 1 cuốn sách hay','2021-11-24'),(60,57,18,2,'sách không hay','2021-11-24'),(61,19,18,3,'sách bình thường','2021-11-24'),(62,100,7,5,'đây là 1 cuốn sách hay','2021-11-24'),(63,68,18,5,'đây là 1 cuốn sách hay','2021-11-24'),(64,98,9,0,'sách không hay','2021-11-24'),(65,25,16,1,'sách không hay','2021-11-24'),(66,16,13,5,'đây là 1 cuốn sách hay','2021-11-24'),(67,100,10,1,'sách không hay','2021-11-24'),(68,11,4,3,'sách bình thường','2021-11-24'),(69,96,6,2,'sách không hay','2021-11-24'),(70,17,8,2,'sách không hay','2021-11-24'),(71,23,24,3,'sách bình thường','2021-11-24'),(72,77,5,1,'sách không hay','2021-11-24'),(73,18,14,3,'sách bình thường','2021-11-24'),(74,96,21,5,'đây là 1 cuốn sách hay','2021-11-24'),(75,23,9,4,'đây là 1 cuốn sách hay','2021-11-24'),(76,12,5,1,'sách không hay','2021-11-24'),(77,61,14,2,'sách không hay','2021-11-24'),(78,13,22,3,'sách bình thường','2021-11-24'),(79,95,16,3,'sách bình thường','2021-11-24'),(80,66,14,0,'sách không hay','2021-11-24'),(81,31,17,0,'sách không hay','2021-11-24'),(82,51,24,4,'đây là 1 cuốn sách hay','2021-11-24'),(83,99,6,5,'đây là 1 cuốn sách hay','2021-11-24'),(84,70,9,2,'sách không hay','2021-11-24'),(85,6,7,0,'sách không hay','2021-11-24'),(86,96,5,5,'đây là 1 cuốn sách hay','2021-11-24'),(87,44,12,4,'đây là 1 cuốn sách hay','2021-11-24'),(88,5,0,3,'sách bình thường','2021-11-24'),(89,79,20,4,'đây là 1 cuốn sách hay','2021-11-24'),(90,87,0,2,'sách không hay','2021-11-24'),(91,63,14,3,'sách bình thường','2021-11-24'),(92,57,12,0,'sách không hay','2021-11-24'),(93,4,12,1,'sách không hay','2021-11-24'),(94,68,21,2,'sách không hay','2021-11-24'),(95,72,5,1,'sách không hay','2021-11-24'),(96,108,15,4,'đây là 1 cuốn sách hay','2021-11-24'),(97,53,24,2,'sách không hay','2021-11-24'),(98,13,13,0,'sách không hay','2021-11-24'),(99,25,4,5,'đây là 1 cuốn sách hay','2021-11-24'),(100,22,5,0,'sách không hay','2021-11-24'),(101,37,1,5,'đây là 1 cuốn sách hay','2021-11-24'),(102,59,9,0,'sách không hay','2021-11-24'),(103,5,2,0,'sách không hay','2021-11-24'),(104,29,10,2,'sách không hay','2021-11-24'),(105,95,18,0,'sách không hay','2021-11-24'),(106,75,5,2,'sách không hay','2021-11-24'),(107,71,24,1,'sách không hay','2021-11-24'),(108,102,22,5,'đây là 1 cuốn sách hay','2021-11-24'),(109,72,6,0,'sách không hay','2021-11-24'),(110,42,17,1,'sách không hay','2021-11-24'),(111,46,4,5,'đây là 1 cuốn sách hay','2021-11-24'),(112,78,10,5,'đây là 1 cuốn sách hay','2021-11-24'),(113,27,22,2,'sách không hay','2021-11-24'),(114,33,14,1,'sách không hay','2021-11-24'),(115,6,12,5,'đây là 1 cuốn sách hay','2021-11-24'),(116,82,9,4,'đây là 1 cuốn sách hay','2021-11-24'),(117,50,18,3,'sách bình thường','2021-11-24'),(118,18,11,5,'đây là 1 cuốn sách hay','2021-11-24'),(119,8,19,1,'sách không hay','2021-11-24'),(120,82,21,4,'đây là 1 cuốn sách hay','2021-11-24'),(121,88,6,2,'sách không hay','2021-11-24'),(122,84,14,0,'sách không hay','2021-11-24'),(123,77,12,0,'sách không hay','2021-11-24'),(124,6,11,0,'sách không hay','2021-11-24'),(125,5,1,3,'sách bình thường','2021-11-24'),(126,103,19,4,'đây là 1 cuốn sách hay','2021-11-24'),(127,107,9,2,'sách không hay','2021-11-24'),(128,103,24,3,'sách bình thường','2021-11-24'),(129,64,0,0,'sách không hay','2021-11-24'),(130,71,24,5,'đây là 1 cuốn sách hay','2021-11-24'),(131,90,15,3,'sách bình thường','2021-11-24'),(132,50,1,1,'sách không hay','2021-11-24'),(133,36,9,4,'đây là 1 cuốn sách hay','2021-11-24'),(134,76,6,4,'đây là 1 cuốn sách hay','2021-11-24'),(135,27,21,0,'sách không hay','2021-11-24'),(136,57,10,4,'đây là 1 cuốn sách hay','2021-11-24'),(137,104,10,3,'sách bình thường','2021-11-24'),(138,59,6,4,'đây là 1 cuốn sách hay','2021-11-24'),(139,39,24,2,'sách không hay','2021-11-24'),(140,104,7,3,'sách bình thường','2021-11-24'),(141,66,21,5,'đây là 1 cuốn sách hay','2021-11-24'),(142,102,3,2,'sách không hay','2021-11-24'),(143,46,24,4,'đây là 1 cuốn sách hay','2021-11-24'),(144,8,24,1,'sách không hay','2021-11-24'),(145,88,13,4,'đây là 1 cuốn sách hay','2021-11-24'),(146,5,0,3,'sách bình thường','2021-11-24'),(147,35,4,1,'sách không hay','2021-11-24'),(148,73,0,5,'đây là 1 cuốn sách hay','2021-11-24'),(149,72,2,4,'đây là 1 cuốn sách hay','2021-11-24'),(150,24,11,3,'sách bình thường','2021-11-24'),(151,94,0,0,'sách không hay','2021-11-24'),(152,88,11,5,'đây là 1 cuốn sách hay','2021-11-24'),(153,56,0,1,'sách không hay','2021-11-24'),(154,73,10,0,'sách không hay','2021-11-24'),(155,93,4,0,'sách không hay','2021-11-24'),(156,49,15,3,'sách bình thường','2021-11-24'),(157,49,8,2,'sách không hay','2021-11-24'),(158,81,16,5,'đây là 1 cuốn sách hay','2021-11-24'),(159,60,18,0,'sách không hay','2021-11-24'),(160,82,7,2,'sách không hay','2021-11-24'),(161,28,22,0,'sách không hay','2021-11-24'),(162,50,11,3,'sách bình thường','2021-11-24'),(163,30,23,0,'sách không hay','2021-11-24'),(164,81,22,5,'đây là 1 cuốn sách hay','2021-11-24'),(165,17,27,2,'sách không hay','2021-11-24'),(166,94,29,0,'sách không hay','2021-11-24'),(167,4,28,5,'đây là 1 cuốn sách hay','2021-11-24'),(168,14,27,3,'sách bình thường','2021-11-24'),(169,53,25,2,'sách không hay','2021-11-24'),(170,104,30,0,'sách không hay','2021-11-24'),(171,106,27,3,'sách bình thường','2021-11-24'),(172,30,25,5,'đây là 1 cuốn sách hay','2021-11-24'),(173,48,29,0,'sách không hay','2021-11-24'),(174,80,30,1,'sách không hay','2021-11-24'),(175,55,26,2,'sách không hay','2021-11-24'),(176,4,29,4,'đây là 1 cuốn sách hay','2021-11-24'),(177,65,28,2,'sách không hay','2021-11-24'),(178,84,30,0,'sách không hay','2021-11-24'),(179,98,27,5,'đây là 1 cuốn sách hay','2021-11-24'),(180,100,28,3,'sách bình thường','2021-11-24'),(181,67,28,0,'sách không hay','2021-11-24'),(182,76,30,0,'sách không hay','2021-11-24'),(183,103,25,2,'sách không hay','2021-11-24'),(184,50,26,1,'sách không hay','2021-11-24'),(185,89,28,5,'đây là 1 cuốn sách hay','2021-11-24'),(186,53,29,5,'đây là 1 cuốn sách hay','2021-11-24'),(187,103,29,1,'sách không hay','2021-11-24'),(188,38,26,5,'đây là 1 cuốn sách hay','2021-11-24'),(189,21,30,1,'sách không hay','2021-11-24'),(190,82,25,3,'sách bình thường','2021-11-24'),(191,93,28,0,'sách không hay','2021-11-24'),(192,60,29,4,'đây là 1 cuốn sách hay','2021-11-24'),(193,50,29,5,'đây là 1 cuốn sách hay','2021-11-24'),(194,26,28,0,'sách không hay','2021-11-24'),(195,100,31,4,'đây là 1 cuốn sách hay','2021-11-24'),(196,87,31,3,'sách bình thường','2021-11-24'),(197,74,31,2,'sách không hay','2021-11-24'),(198,10,31,2,'sách không hay','2021-11-24'),(199,74,31,1,'sách không hay','2021-11-24'),(200,43,31,2,'sách không hay','2021-11-24'),(201,34,31,1,'sách không hay','2021-11-24'),(202,2,31,1,'sách không hay','2021-11-24'),(203,110,31,1,'sách không hay','2021-11-24'),(204,22,31,0,'sách không hay','2021-11-24'),(205,18,31,5,'đây là 1 cuốn sách hay','2021-11-24'),(206,61,31,3,'sách bình thường','2021-11-24'),(207,49,31,2,'sách không hay','2021-11-24'),(208,12,31,0,'sách không hay','2021-11-24'),(209,24,31,3,'sách bình thường','2021-11-24'),(210,17,31,0,'sách không hay','2021-11-24'),(211,24,31,3,'sách bình thường','2021-11-24'),(212,102,31,1,'sách không hay','2021-11-24'),(213,53,31,2,'sách không hay','2021-11-24'),(214,66,31,0,'sách không hay','2021-11-24'),(215,0,8,3,'sách tạm','2021-12-10'),(216,0,8,0,'sách ko hay','2021-12-10'),(217,4,32,5,'hay','2021-12-10'),(218,11,32,3,'sách khá hay','2021-12-10');
 /*!40000 ALTER TABLE `product_reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `products` (
   KEY `provider_id_idx` (`provider_id`),
   CONSTRAINT `category_id` FOREIGN KEY (`product_category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `provider_id` FOREIGN KEY (`provider_id`) REFERENCES `shop` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +242,7 @@ CREATE TABLE `shipping` (
   PRIMARY KEY (`id`),
   KEY `order_id_shipping_idx` (`order_id`),
   CONSTRAINT `order_id_shipping` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `shipping` (
 
 LOCK TABLES `shipping` WRITE;
 /*!40000 ALTER TABLE `shipping` DISABLE KEYS */;
-INSERT INTO `shipping` VALUES (1,1,'pending','1970-01-01','2021-11-29'),(2,2,'pending','1970-01-01','2021-11-29'),(3,3,'pending','1970-01-01','2021-11-29'),(4,6,'pending','2021-11-29',NULL),(5,7,'pending','2021-11-29',NULL),(6,8,'pending','2021-11-29',NULL),(7,9,'pending','2021-11-29',NULL),(8,10,'pending','2021-11-29',NULL),(9,11,'pending','2021-11-29',NULL),(10,12,'pending','2021-11-29',NULL),(11,13,'pending','2021-11-29',NULL),(12,14,'pending','2021-11-29',NULL),(13,15,'pending','2021-11-30',NULL),(14,16,'pending','2021-11-30',NULL);
+INSERT INTO `shipping` VALUES (1,1,'pending','1970-01-01','2021-11-29'),(2,2,'pending','1970-01-01','2021-11-29'),(3,3,'pending','1970-01-01','2021-11-29'),(4,6,'pending','2021-11-29',NULL),(5,7,'pending','2021-11-29',NULL),(6,8,'pending','2021-11-29',NULL),(7,9,'pending','2021-11-29',NULL),(8,10,'pending','2021-11-29',NULL),(9,11,'pending','2021-11-29',NULL),(10,12,'pending','2021-11-29',NULL),(11,13,'pending','2021-11-29',NULL),(12,14,'pending','2021-11-29',NULL),(13,15,'pending','2021-11-30',NULL),(14,16,'pending','2021-11-30',NULL),(15,17,'pending','2021-12-01',NULL),(16,18,'pending','2021-12-01',NULL),(17,19,'pending','2021-12-01',NULL),(18,20,'pending','2021-12-01',NULL),(19,26,'pending','2021-12-02',NULL);
 /*!40000 ALTER TABLE `shipping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `shop` (
   PRIMARY KEY (`id`),
   KEY `shop_owner_id_user_idx` (`shop_owner_id`),
   CONSTRAINT `shop_owner_id_user` FOREIGN KEY (`shop_owner_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `shop` (
 
 LOCK TABLES `shop` WRITE;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
-INSERT INTO `shop` VALUES (0,0,0),(1,1,0),(2,2,0),(8,8,0),(18,18,0);
+INSERT INTO `shop` VALUES (0,0,0),(1,1,0),(2,2,0),(8,8,0),(18,18,0),(22,22,0),(23,23,0),(24,24,0),(25,25,0),(26,26,0),(27,27,0),(28,28,0),(29,29,0),(30,30,0),(31,31,0),(32,32,0);
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +295,7 @@ CREATE TABLE `users` (
   `user_type` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +304,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (0,'nhatanh','user','123'),(1,'dan','user','123'),(2,'son','user','123'),(8,'testing','user','$2b$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(9,'asd','user','$2b$12$giDXPXkEBjSX1FuSSbRPvuj7RkYeb5pknRPGNsXMGLfYiYBFH4o5q'),(10,'19020210','user','$2b$12$FX7YRkUZfNGkXogkAwaDdel3rqAP.2VcODZp9/gTfq/12a6Lp03Jq'),(11,'lmap','user','$2b$12$isJToZvKyzjOp8N8Fs1HXu0KfiEIM8Tm5L4ZbD4AtfOjXxvdl6pE.'),(12,'no1','user','$2b$12$BPU8tSWQrSx2UuFFMr8HN.FCxVXT/hhuto7raFKJW/LD4B9e7k41S'),(13,'no2','user','$2b$12$dy.VKPuOrGh23ZOTLpbC4.E5D39dfgdn.BHehUjXhAEcSKTYYTF.6'),(14,'no3','user','$2b$12$RvCjhpL8Ot7lYK16W.QYPeuXocFB/E3eW7rUcmr0HGaVFKzQA.Faa'),(15,'rrrr','user','$2b$12$xbDILu3ETwCme/2oTmBDLu5xqOqbYX7D/VEipe2GYZnud8.jbTWn.'),(16,'testing123','user','$2b$12$dQoDJ9vuozKWxS8et1UH7.8qvaRYHK40Em/jaw9CQYd8FVVdjduEe'),(17,'aaaa','user','$2b$12$2wwyT.X94gvkMTrmwtV9veeVSLyfWRBVDTdDSFPqI0Z611bFOfBNu'),(18,'admin','user','$2b$12$dnbFZH76Df.dWBeH6GdFAOcEl8vHz8lS6foSCjo6rwx06up2UvfC.'),(19,'','user','$2b$12$KA4gN66JnJiFrBzBV47k7.EImAahTvJVEK8Cof1zWveYdJV172MLC');
+INSERT INTO `users` VALUES (0,'nhatanh','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(1,'dan','user','$2b$12$FX7YRkUZfNGkXogkAwaDdel3rqAP.2VcODZp9/gTfq/12a6Lp03Jq'),(2,'son','user','$2b$12$isJToZvKyzjOp8N8Fs1HXu0KfiEIM8Tm5L4ZbD4AtfOjXxvdl6pE.'),(3,'user3','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(4,'user4','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(5,'user5','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(6,'user6','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(7,'user7','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(8,'testing','user','$2b$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(9,'asd','user','$2b$12$giDXPXkEBjSX1FuSSbRPvuj7RkYeb5pknRPGNsXMGLfYiYBFH4o5q'),(10,'19020210','user','$2b$12$FX7YRkUZfNGkXogkAwaDdel3rqAP.2VcODZp9/gTfq/12a6Lp03Jq'),(11,'lmap','user','$2b$12$isJToZvKyzjOp8N8Fs1HXu0KfiEIM8Tm5L4ZbD4AtfOjXxvdl6pE.'),(12,'no1','user','$2b$12$BPU8tSWQrSx2UuFFMr8HN.FCxVXT/hhuto7raFKJW/LD4B9e7k41S'),(13,'no2','user','$2b$12$dy.VKPuOrGh23ZOTLpbC4.E5D39dfgdn.BHehUjXhAEcSKTYYTF.6'),(14,'no3','user','$2b$12$RvCjhpL8Ot7lYK16W.QYPeuXocFB/E3eW7rUcmr0HGaVFKzQA.Faa'),(15,'rrrr','user','$2b$12$xbDILu3ETwCme/2oTmBDLu5xqOqbYX7D/VEipe2GYZnud8.jbTWn.'),(16,'testing123','user','$2b$12$dQoDJ9vuozKWxS8et1UH7.8qvaRYHK40Em/jaw9CQYd8FVVdjduEe'),(17,'aaaa','user','$2b$12$2wwyT.X94gvkMTrmwtV9veeVSLyfWRBVDTdDSFPqI0Z611bFOfBNu'),(18,'admin','admin','$2b$12$dnbFZH76Df.dWBeH6GdFAOcEl8vHz8lS6foSCjo6rwx06up2UvfC.'),(19,'user19','user','$12$mGB.0hZ4iqDpjke1xENhJen1uC1y.ru40BQdxRf7gmS6gXW6UgJ3G'),(20,'testing2','user','$2b$12$WnTVY6f0R0l8lx81nVkRs.6eIQiCa5XkrS71LqoXkpqmzPK7prUja'),(21,'testing3','user','$2b$12$Q39jqch0FUIuXHoe781LV.ReOgPmuWyqrabsY4xcejI89NktSEyWy'),(22,'testing5','user','$2b$12$zdqe/1cJ5AYRQiVs5lPgnOym3C52Rhg5AAlHoPWhDf6NQYIp2rTFW'),(23,'testing6','user','$2b$12$WZuaC4O5OjZKj1BWpztT6u3VR2zq3CBt/rvVmOKJvidYVQrUWvEsC'),(24,'test1','user','$2b$12$Kcx2CU2cKGvO1WERhaOiQ.YDvlnxqGjNIN8k8.PshKt35PLdyrium'),(25,'nguoidung25','user','$2b$12$dgaylCx/g/TWo1VmwF82he9sgEoKsswJUAU2yGB1S/41UpbnyB2tS'),(26,'nguoidung26','user','$2b$12$DzkOcP8CyFZXPJ5S2iHNgOiC.BQXa2GcMd4DU6O5WSJF7/J2mPcaK'),(27,'nguoidung27','user','$2b$12$U7vfKVf1T6ZfRfVOcrU5dOdIWGMWPGWltK0EYopHvNvVYdOzoPaJG'),(28,'nguoidung28','user','$2b$12$PS/P9FoR5X4lAnBonV8D.OvjwL2MKzJcrjiv31ctLCpVfrfW4F3Hi'),(29,'nguoidung29','user','$2b$12$u0tU3EfnlD4CxvVEhmKuTOo5GelhegoSfW8CRZwcNNY72k07p94t.'),(30,'nguoidung30','user','$2b$12$.mz2AMArnL/X5gCbbT8OVOFzevRvOuHi7m8RXI3Od..8R/qrSjSHe'),(31,'nguoidung31','user','$2b$12$7/BznFQ9MLhpmhydwgGZdO8tEAqQ.OvTwxIk0Ca6T1NwLDz/jNJGW'),(32,'nguoidung36','user','$2b$12$orMndmFoIthDuzi9t85T8uVtsjXqC3SQpF1HbcuduFr8b373PKTYO');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -317,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-26 21:37:41
+-- Dump completed on 2021-12-10 20:40:39
