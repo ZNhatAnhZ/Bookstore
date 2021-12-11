@@ -124,9 +124,9 @@ function loadComment(data) {
     })
 }
 
-function addCart(data) {
+async function addCart(data) {
     let countProduct = 0;
-    data.forEach(async (e) => {
+    await Promise.all(data.map(async (e) => {
         countProduct++;
         const ProductsResponse = await axios.get(`/products?id=${e.product_id}`);
 
@@ -157,7 +157,7 @@ function addCart(data) {
         divHead.append(h5, divPrice);
         li.append(img, divHead);
         cartPanel.append(li);
-    })
+    }))
     headerCartNumber.innerText = countProduct;
     headerCartList.append(cartFoot);
 }
@@ -202,12 +202,28 @@ window.addEventListener('load', async () => {
         })
         productInfoDescription.innerText = product.data.product_details;
 
+        const ratingStarContainer = document.querySelector('div.rating-new-star');
+        const productRating = await axios.get(`/productReviews/${id}`);
+        for (let i = 0; i < productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            ratingStarContainer.append(ratingStar);
+        }
+        for (let i = 0; i < 5 - productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star-o');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            ratingStarContainer.append(ratingStar);
+        }
+
         if (userResponse.data.user_id) {
             const cartResponse = await axios.get(`/cart?userId=${userResponse.data.user_id}`);
             const getRecommendedProduct = await axios.get(`/products/recommendedproducts/${userResponse.data.user_id}`);
-            addCart(cartResponse.data);
-            console.log(getRecommendedProduct.data);
-            addRecommendedProducts(getRecommendedProduct.data);
+            await addCart(cartResponse.data);
+            await addRecommendedProducts(getRecommendedProduct.data);
         }
 
         loadComment(commentResponse.data);
@@ -296,9 +312,9 @@ addCommentButton.addEventListener('click', async () => {
 logo.firstElementChild.setAttribute('href', '/');
 
 
-function addRecommendedProducts(data) {
+async function addRecommendedProducts(data) {
     const recommendedProductsPanel = document.querySelector('div.grid__row.gird__row-limit');
-    data.forEach((element) => {
+    await Promise.all(data.map(async (element) => {
         let product = document.createElement('div');
         product.classList.add('grid-column-2');
         let productLink = document.createElement('a');
@@ -321,24 +337,7 @@ function addRecommendedProducts(data) {
         itemHeart.classList.add('fa-heart-o');
         let productRatingStar = document.createElement('span');
         productRatingStar.classList.add('rating-star');
-        let itemStar = document.createElement('i');
-        itemStar.classList.add('fa');
-        itemStar.classList.add('fa-star');
-        let itemStar1 = document.createElement('i');
-        itemStar1.classList.add('fa');
-        itemStar1.classList.add('fa-star');
-        let itemStar2 = document.createElement('i');
-        itemStar2.classList.add('fa');
-        itemStar2.classList.add('fa-star');
-        let itemStar3 = document.createElement('i');
-        itemStar3.classList.add('fa');
-        itemStar3.classList.add('fa-star');
-        let itemStar4 = document.createElement('i');
-        itemStar4.classList.add('fa');
-        itemStar4.classList.add('fa-star');
-        let itemStar5 = document.createElement('i');
-        itemStar5.classList.add('fa');
-        itemStar5.classList.add('fa-star-o');
+
         let productNumberSold = document.createElement('span');
         productNumberSold.classList.add('rating-number-sold');
         productNumberSold.innerText = 'Số lượng ' + element.quantity;
@@ -359,12 +358,27 @@ function addRecommendedProducts(data) {
         productPriceText.innerText = element.product_price + 'đ';
         productOldPrice.innerText = element.product_price * 1.5 + 'đ';
 
-        productRatingStar.append(itemStar, itemStar1, itemStar2, itemStar3, itemStar4);
+        const productRating = await axios.get(`/productReviews/${element.id}`);
+        for (let i = 0; i < productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            productRatingStar.append(ratingStar);
+        }
+        for (let i = 0; i < 5 - productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star-o');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            productRatingStar.append(ratingStar);
+        }
+
         productRatingHeart.append(itemHeart);
         productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
         productPrice.append(productOldPrice, productPriceText);
         productLink.append(img, productTitle, productPrice, productItemRating, productItemFavourite);
         product.append(productLink);
         recommendedProductsPanel.append(product);
-    })
+    }))
 }

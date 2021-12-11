@@ -82,10 +82,10 @@ cartItemBtn.addEventListener('click', async () => {
     window.location = `/cart/${userResponse.data.user_id}`;
 });
 
-function addProduct(data) { //take the element in data array then add into productsPanel
+async function addProduct(data) { //take the element in data array then add into productsPanel
     let count = 0;
     oldPage = 1;
-    data.forEach(element => {
+    await Promise.all(data.map(async (element) => {
         let product = document.createElement('div');
         product.classList.add('grid-column-new2');
         let productLink = document.createElement('a');
@@ -108,24 +108,7 @@ function addProduct(data) { //take the element in data array then add into produ
         itemHeart.classList.add('fa-heart-o');
         let productRatingStar = document.createElement('span');
         productRatingStar.classList.add('rating-star');
-        let itemStar = document.createElement('i');
-        itemStar.classList.add('fa');
-        itemStar.classList.add('fa-star');
-        let itemStar1 = document.createElement('i');
-        itemStar1.classList.add('fa');
-        itemStar1.classList.add('fa-star');
-        let itemStar2 = document.createElement('i');
-        itemStar2.classList.add('fa');
-        itemStar2.classList.add('fa-star');
-        let itemStar3 = document.createElement('i');
-        itemStar3.classList.add('fa');
-        itemStar3.classList.add('fa-star');
-        let itemStar4 = document.createElement('i');
-        itemStar4.classList.add('fa');
-        itemStar4.classList.add('fa-star');
-        let itemStar5 = document.createElement('i');
-        itemStar5.classList.add('fa');
-        itemStar5.classList.add('fa-star-o');
+
         let productNumberSold = document.createElement('span');
         productNumberSold.classList.add('rating-number-sold');
         productNumberSold.innerText = 'Số lượng ' + element.quantity;
@@ -146,7 +129,22 @@ function addProduct(data) { //take the element in data array then add into produ
         productPriceText.innerText = element.product_price + 'đ';
         productOldPrice.innerText = element.product_price * 1.5 + 'đ';
 
-        productRatingStar.append(itemStar, itemStar1, itemStar2, itemStar3, itemStar4);
+        const productRating = await axios.get(`/productReviews/${element.id}`);
+        for (let i = 0; i < productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            productRatingStar.append(ratingStar);
+        }
+        for (let i = 0; i < 5 - productRating.data; i++) {
+            let ratingStar = document.createElement('i');
+            ratingStar.classList.add('fa');
+            ratingStar.classList.add('fa-star-o');
+            ratingStar.setAttribute('aria-hidden', 'true');
+            productRatingStar.append(ratingStar);
+        }
+
         productRatingHeart.append(itemHeart);
         productItemRating.append(productRatingHeart, productRatingStar, productNumberSold);
         productPrice.append(productOldPrice, productPriceText);
@@ -160,7 +158,7 @@ function addProduct(data) { //take the element in data array then add into produ
             product.style.display = 'none';
         }
         count++;
-    });
+    }))
     addPagination();
 }
 

@@ -15,6 +15,7 @@ const logout = require('./src/routes/logout');
 const register = require('./src/routes/register');
 const personalshop = require('./src/routes/personalshop');
 const cart = require('./src/routes/cart');
+const productReviews = require('./src/routes/productReviews');
 
 
 app.set('view engine', 'ejs');
@@ -56,8 +57,9 @@ app.use('/register', register);
 app.use('/logout', logout);
 app.use('/personalshop', personalshop);
 app.use('/cart', cart);
+app.use('/productReviews', productReviews);
 
-// function randomIntFromInterval(min, max) { // min and max included 
+// function randomIntFromInterval(min, max) { // min and max included
 //     return Math.floor(Math.random() * (max - min + 1) + min)
 // };
 
