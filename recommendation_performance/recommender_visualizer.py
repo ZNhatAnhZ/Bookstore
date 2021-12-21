@@ -195,7 +195,7 @@ finally:
         cursor.close()
 
 
-rs = Recommendation_System(np.array(arrayOfRating), 3)
-print("CHOOSEN PRODUCT TO RECOMMEND FOR THIS USER:", rs.recommend(33))
+rs = Recommendation_System(np.array(arrayOfRating), 4)
+print("CHOOSEN PRODUCT TO RECOMMEND FOR THIS USER:", rs.recommend(38))
 
 print("--- %s seconds ---" % (time.time() - start_time))
