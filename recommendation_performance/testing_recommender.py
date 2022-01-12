@@ -7,8 +7,10 @@ from scipy import sparse
 import sys, json
 import traceback
 import time
+import os, psutil
 
 start_time = time.time()
+process = psutil.Process(os.getpid())
 
 
 class Recommendation_System(object):
@@ -155,7 +157,7 @@ rate_train[:, :2] -= 1
 rate_test[:, :2] -= 1
 
 
-rs = Recommendation_System(rate_train, 30)
+rs = Recommendation_System(rate_train, 45)
 rs.generate_prerequisite()
 
 n_tests = rate_test.shape[0]
@@ -169,5 +171,5 @@ for n in range(n_tests):
 
 RMSE = np.sqrt(SE / n_tests)
 print("Deviation =", RMSE)
-
 print("Execution time = %s seconds" % (time.time() - start_time))
+print("Memory usage = %s GB" % (process.memory_info()[1] / 1024 ** 3))
